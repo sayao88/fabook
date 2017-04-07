@@ -1,0 +1,21 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+  <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+    <h3>以下の内容で、送信する。</h3>
+    <%= form_for(@blog) do |f| %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :content %>
+      <p>タイトル:<%= @blog.title %></p>
+      <p>本文:<%= @blog.content %></p>
+      <%= f.submit "登録",class: 'btn btn-primary btn-block' %>
+    <% end %>
+    <%= form_for(@blog, url: new_blog_path, method: 'get') do |f| %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :content %>
+      <%= f.submit "もどる", name: 'back', class: 'btn btn-default btn-block' %>
+    <% end %>
+  </div>
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

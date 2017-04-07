@@ -1,0 +1,34 @@
+
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+    <div class="mod-heading-lv1">
+      <h1 class="heading__h-element">
+          <span class="heading__span">お問い合わせ 内容確認</span>
+      </h1>
+    <!--/.mod-heading-lv1--></div>
+      <h3>以下の内容で、送信する。</h3>
+
+		<%= form_for(@contact) do |f| %>
+
+		  <%= f.hidden_field :name %>
+		  <%= f.hidden_field :email %>
+		  <%= f.hidden_field :content %>
+		  
+		  <p>名前：<%= @contact.name %></p>
+		  <p>メールアドレス：<%= @contact.email %></p> 
+		  <p>内容：<%= @contact.content %></p>
+		  
+		  <%= f.submit "送信",class: 'btn btn-primary btn-block' %>
+		<% end %>
+
+		<%= form_for(@contact, url:new_contact_path, method:'get') do |f| %>
+		  <%= f.hidden_field :name %>
+		  <%= f.hidden_field :email %>
+		  <%= f.hidden_field :content %>
+		    <p><%= f.submit 'もどる',name:'back',class: 'btn btn-default btn-block' %></p>
+		<% end %>
+		
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

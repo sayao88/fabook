@@ -1,0 +1,14 @@
+<%= notice %>
+
+<%= form_for(@blog, url:choose_new_or_edit) do |f| %><%# @blog(コントローラーに定義した変数)をform_forにわたす。中身はfで引き出す %>
+  <%= f.error_messages! %>
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+  <br>
+  <%= f.label :content %>
+  <%= f.text_field :content, class: 'form-control' %>
+  <br>
+  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "ブログ一覧画面に戻る", blogs_path, class: 'btn btn-default' %>

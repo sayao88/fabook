@@ -1,0 +1,17 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+<h1>お問い合わせ 履歴</h1>
+
+<% @contacts.each do |contact| %>
+    <p>名前:<%= contact.name %></p>
+    <p>メールアドレス:<%= contact.email %></p>
+    <p>お問い合わせ内容:<%= contact.content %></p>
+<% end %>
+
+<p><%= link_to "新規お問い合わせする" , new_contact_path, class: 'btn btn-default' %></p>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

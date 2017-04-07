@@ -1,0 +1,42 @@
+
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+      <div class="mod-heading-lv1-0004">
+          <h2 class="heading__h-element">
+              <span class="heading__span">お知らせ</span>
+          </h2>
+      <!--/.mod-heading-lv1--></div>
+
+      <div class="mod-textbox-info">
+          <% @notifications.each do |notification| %>
+              <%= link_to(blog_path(notification.comment.blog, notification_id: notification.id), class: "textbox__content") do %>
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap">
+                      </div>
+                      <div class="textbox__title-wrap">
+                          <p class="mod-p"><%= notification.comment.user.try(:name) %>さん</p>
+                      </div>
+                      <div class="textbox__description-wrap">
+                          あなたのブログ（<%= notification.comment.blog.title %> ）にコメントしました。
+                      </div>
+                      <div class="textbox__description-wrap">
+                          <%= notification.created_at %>
+                      </div>
+                      <div class="textbox__description-wrap">
+                          <%if notification.read==true %>
+                            既読
+                          <%else%>
+                            未読
+                          <%end%>
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --><% end %>
+          <% end %>
+      <!--/.mod-textbox --></div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+

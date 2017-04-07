@@ -1,0 +1,33 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+      <div class="mod-heading-lv1">
+          <h2 class="heading__h-element">
+              <span class="heading__span">メッセージ一覧</span>
+          </h2>
+      <!--/.mod-heading-lv1--></div>
+
+      <div class="mod-textbox-info">
+          <% @conversations.each do |conversation| %>
+            <% if conversation.target_user(current_user).present? %>
+              <a href="<%= conversation_messages_path(conversation)%>" class="textbox__content">
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap">
+                      </div>
+                      <div class="textbox__title-wrap">
+                          <p class="mod-p"><%= conversation.target_user(current_user).name %></p>
+                      </div>
+                      <div class="textbox__description-wrap">
+                          
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --></a>
+            <% end %>
+          <% end %>
+      <!--/.mod-textbox --></div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+

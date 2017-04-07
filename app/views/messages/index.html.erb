@@ -1,0 +1,62 @@
+<section class="layout-section-for-conversation">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+    <div class="mod-heading-lv1">
+      <h1 class="heading__h-element">
+          <span class="heading__span"><%= @talk_person_name %>との会話</span>
+      </h1>
+    <!--/.mod-heading-lv1--></div>
+
+<% if @over_ten %>
+  <p class="text-center"><%= link_to '以前のメッセージ', '?m=all' %></p>
+<% end %>
+
+<div class="mod-textbox-conversation">
+    <% @messages.each do |message| %>
+        <% if message.body %>
+            <% user = User.find(message.user_id) %>
+            <div class="textbox__content <% if user.id == current_user.id %>vr-right<%end%>">
+                <div class="textbox__content-inner">
+                    <div class="textbox__img-wrap">
+                        <%= profile_img(user,"mod-img-profile-xsmall") %>
+                    </div>
+                    <div class="textbox__title-wrap">
+                        <p class="mod-p vr-lh-sm"><span class="util-font-bold"><%= user.name %></span></p>
+                    </div>
+                    <div class="textbox__description-wrap">
+                        <div class="mod-balloon-default <% if user.id == current_user.id %>vr-right<%else%>vr-left<%end%>">
+                            <span class="balloon__body"><%= message.body %></span>
+                            <p class="mod-p vr-lh-xsm">
+                              <span class="util-font-xs"><%= message.message_time %></span>　
+                              <span class="util-font-xs" id="test"><% if message.read %>既読<%end%></span>
+                            </p>
+                        </div>
+                    </div>
+                <!--/.textbox__content-inner--></div>
+            <!--/.textbox__content --></div>
+        <% end %>
+    <% end %>
+<!--/.mod-textbox --></div>
+
+<div class="layout-box-default">
+  <div class="layout-box__first-wrap">
+
+<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  <p class="field mod-p">
+    <%= f.text_area :body, class: "form-control" %>
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+  </p>
+  <p class="text-center"><%= f.submit "メッセージを送る",class:"btn btn-primary" %></p>
+
+<% end %>
+
+  </div>
+</div>
+<p class="text-center"><%= link_to 'メッセージ一覧に戻る', conversations_path , class:"mod-btn-back vr-small" %></p>
+<p class="text-center"><%= link_to 'ユーザー一覧に戻る', users_path , class:"mod-btn-back vr-small" %></p>
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+
+

@@ -1,0 +1,8 @@
+<h3>Follower</h3>
+<% if @user.followers.present? %>
+    <% @user.followers.each do |user| %>
+        <p><%= user.name %></p>
+    <% end %>
+<% else %>
+    <p>no users</p>
+<% end %>

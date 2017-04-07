@@ -1,0 +1,46 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+    
+    <div class="mod-heading-lv1">
+      <h1 class="heading__h-element">
+          <span class="heading__span">ユーザー</span>
+      </h1>
+    <!--/.mod-heading-lv1--></div>
+
+    <div class="layout-list-4collumn">
+        <ul class="layout-list__ul">
+        <% @users.each do |user| %>
+            <% if user.id != @myself.id %>
+            <li class="layout-list__li">
+
+<div class="mod-textbox-a">
+    <div class="textbox__content vr-right">
+         <div class="textbox__content-inner">
+            <div class="textbox__img-wrap">
+                <%= profile_img(user) %>
+                <p class="mod-p"><strong><%= link_to user.name, user %></strong><br>
+                <span class="util-font-s util-breal-all"><%= user.email %></span>
+                </p>
+            </div>
+            <div class="textbox__title-wrap">
+               <%= render partial: 'follow_form', locals: { user: user } if signed_in?   %>
+            </div>
+            <div class="textbox__description-wrap">
+               <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: 'post'%>
+            </div>
+        <!--/.textbox__content-inner--></div>
+    <!--/.textbox__content --></div>
+<!--/.mod-textbox --></div>
+
+            <!--/layout-list__li--></li>
+            <% end %>
+        <% end %>
+        </ul>
+    <!--/layout-list--></div>
+
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+

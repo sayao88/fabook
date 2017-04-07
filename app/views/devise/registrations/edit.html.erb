@@ -1,0 +1,64 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+
+    <div class="mod-heading-lv1">
+      <h1 class="heading__h-element">
+          <span class="heading__span"><%= resource_name.to_s.humanize %>登録情報を編集</span>
+      </h1>
+    <!--/.mod-heading-lv1--></div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= f.error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+  </div>
+  <br>
+  <!-- 名前入力用のフィールドを追加 -->
+  <div class="field">
+    <%= f.label :名前 %><br />
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <br>
+
+
+    <% if @user.provider.blank? %>
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        </div>
+        <br>
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+        </div>
+        <br>
+        <div class="field">
+          <%= f.label :current_password %><br />
+          <%= f.password_field :current_password, autocomplete: "off", class: 'form-control' %>
+        </div>
+    <% end %>
+
+  <!--画像登録-->
+  <div class="field">
+    <%= profile_img(@user) if profile_img(@user) %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "更新", class: 'btn btn-primary btn-block' %>
+  </div>
+<% end %>
+
+<p><%= button_to "キャンセル", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-default' %></p>
+
+<br><br>
+<%= link_to "Back", :back, class: 'btn btn-default' %>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

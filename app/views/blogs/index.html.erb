@@ -1,0 +1,42 @@
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+        <% if notice then %>
+            <p class="text-center"><%= notice %></p>
+        <% end %>
+
+        <div class="mod-heading-lv1">
+          <h1 class="heading__h-element">
+              <span class="heading__span">ブログ一覧</span>
+          </h1>
+        <!--/.mod-heading-lv1--></div>
+
+        <p class="mod-p"><%= link_to "ブログを作成する", new_blog_path, class: 'btn btn-default' %></p>
+
+        <div class="mod-textbox-info">
+            <% @blogs.each do |blog| %>
+                <div class="textbox__content">
+                                <div class="textbox__content-inner">
+                                    <div class="textbox__img-wrap">
+                                    </div>
+                                    <div class="textbox__title-wrap">
+                                        <p class="mod-p"><%= link_to blog_path(blog) do %><%= blog.title %><% end %></p>
+                                    </div>
+                                    <div class="textbox__description-wrap">
+                                        <%= blog.content %>
+                                    </div>
+                                    <div class="textbox__description-wrap">
+                                        <p>書いた人:<%= blog.user.name %></p>
+                                        <p>プロフィール画像:<%= profile_img(blog.user) %></p>
+                <%= link_to "編集", edit_blog_path(blog.id), class: 'btn btn-default' %>
+                <%= link_to "削除", blog_path(blog), method: :delete, data: {confirm:'本当に削除していいですか？'}, class: 'btn btn-default btn-sm btn btn-danger' %>
+                                    </div>
+                                <!--/.textbox__content-inner--></div>
+                            <!--/.textbox__content --></div>
+        <% end %>
+    <!--/.mod-textbox --></div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

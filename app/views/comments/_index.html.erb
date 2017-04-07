@@ -1,0 +1,16 @@
+<ul>
+  <% comments.each do |comment| %>
+    <% unless comment.id.nil? %>
+      <li>
+        <p class="left"><span class="util-font-s"><%= comment.user.name %>さんがコメントしました。</span></p>
+        <p class="left"><%= comment.content %></p>
+        <% if current_user.id == comment.user.id %>
+          <p class="right">
+            <%= link_to '', blog_comment_path(blog, comment), class: "fa fa-trash-o fa-lg", method: :delete, remote: true, data: { confirm: '本当に削除していいですか？' } %>
+          </p>
+        <% end %>
+      </li>
+      <hr>
+    <% end %>
+  <% end %>
+</ul>
