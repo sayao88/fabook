@@ -7,8 +7,13 @@ class User < ActiveRecord::Base
     #deviseの設定配下に追記
     mount_uploader :avatar, AvatarUploader
 
+    # topicモデルとアソシエーション
+    has_many :topics, dependent: :destroy
+    has_many :topic_comments, dependent: :destroy
+
     # blogモデルとアソシエーション
     has_many :blogs, dependent: :destroy
+
     # CommentモデルのAssociationを設定
     has_many :comments, dependent: :destroy
 

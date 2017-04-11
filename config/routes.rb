@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     # リクエスト（HTTPメソッドがget、URLが/blogs)のものが来た場合、blogsコントローラーのindexアクションを実行
     # get 'blogs' => 'blogs#index'
 
+    resources :topics do
+        resources :topic_comments
+    end
+
     # resoucesメソッドを使用することで、CRUD（作成・読み取り・更新・削除）を実現するためのroutingが、
     # 適切なHTTPメソッド（get/post/patch/delete)と組み合わされた上で自動的に生成されます。
     resources :blogs do
@@ -36,6 +40,7 @@ Rails.application.routes.draw do
             post:confirm
         end
     end
+
     # 最初から用意されているものはこの1行でOK　resources :contacts, only: [:index, :new, :create]
     resources :contacts, only: [:index, :new, :create] do
         collection do
@@ -47,7 +52,7 @@ Rails.application.routes.draw do
 
     # ルート・ディレクトリでどのアクションを実行するかを設定することができます。
     # root 'コントローラー名#アクション名'
-    root 'top#index'
+    root 'topics#index'
 
     # メール送信確認用
     if Rails.env.development?

@@ -13,24 +13,24 @@
 
     <div class="blog-text">
       <p class="left"><strong>タイトル</strong></p>
-      <p class="left"><%= @blog.title %></p>
+      <p class="left"><%= @topic.title %></p>
       <p class="left"><strong>内容</strong></p>
-      <p class="left"><%= @blog.content %></p>
+      <p class="left"><%= @topic.content %></p>
       <p class="right">
         <strong>作成時間:</strong>
-        <%= @blog.created_at.strftime("%y/%m/%d %p %l:%M") %>
+        <%= @topic.created_at.strftime("%y/%m/%d %p %l:%M") %>
       </p>
     </div>
     <p>コメント一覧</p>
     <div id="comments_area">
-      <%= render partial: 'comments/index', locals: { comments: @comments, blog: @blog } %>
+      <%= render partial: 'topic_comments/index', locals: { comments: @comments, topic: @topic } %>
     </div>
-    <%= render partial: 'comments/form', locals: { comment: @comment, blog: @blog } %>
+    <%= render partial: 'topic_comments/form', locals: { comment: @comment, topic: @topic } %>
     
-    <% if current_user.id == @blog.user_id %>
-      <p class="mod-p text-center"><%= link_to '編集', edit_blog_path(@blog) %></p>
+    <% if current_user.id == @topic.user_id %>
+      <p class="mod-p text-center"><%= link_to '編集', edit_topic_path(@topic) %></p>
     <% end %>
-    <p class="mod-p text-center"><%= link_to '戻る', blogs_path %></p>
+    <%= link_to "ホームに戻る", root_path, class: 'btn btn-default' %>
 
     
     <span class="adj-layout-end"> </span>
