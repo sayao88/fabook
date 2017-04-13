@@ -1,0 +1,60 @@
+
+    <div class="mod-side-menu-0002">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">友達リスト</p>
+                <ul class="side-menu__ul">
+                <% user_list(current_user).each do |user| %>
+                    <li class="side-menu__li">
+                        <div class="side-menu__left-area">
+                            <%= profile_img(user,'side-menu__thumbs') %>
+                        <!--/side-menu__left-area--></div>
+                        <div class="side-menu__right-area">
+                            <p class="side-menu__p__upper"><%= user.name %></p>
+                        <!--/side-menu__right-area--></div>
+                    </li>
+                    <% end %>
+                </ul>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>
+
+    <div class="mod-side-menu-0002">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">あなたをフォローしています</p>
+                <ul class="side-menu__ul">
+                <% user_list(current_user).each do |user| %>
+                    <li class="side-menu__li">
+                        <div class="side-menu__left-area">
+                            <%= profile_img(user,'side-menu__thumbs') %>
+                        <!--/side-menu__left-area--></div>
+                        <div class="side-menu__right-area">
+                            <p class="side-menu__p__upper"><%= user.name %></p>
+                        <!--/side-menu__right-area--></div>
+                    </li>
+                    <% end %>
+                </ul>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>
+
+        <div class="mod-side-menu-0002">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">もっと知り合いを探しましょう</p>
+                <ul class="side-menu__ul">
+                <% user_list(current_user).each do |user| %>
+                    <li class="side-menu__li">
+                        <div class="side-menu__left-area">
+                            <%= profile_img(user,'side-menu__thumbs') %>
+                        <!--/side-menu__left-area--></div>
+                        <div class="side-menu__right-area">
+                            <p class="side-menu__p__upper"><%= user.name %></p>
+                        <!--/side-menu__right-area--></div>
+                    </li>
+                    <% end %>
+                </ul>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>

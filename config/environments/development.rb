@@ -43,6 +43,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   config.action_mailer.delivery_method = :letter_opener_web
 
-  # cloud9用better_errorsを使用する場合に記述
-  # BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 end
+
+  # cloud9用better_errorsを使用する場合に記述
+  BetterErrors::Middleware.allow_ip! "0.0.0.0/0"

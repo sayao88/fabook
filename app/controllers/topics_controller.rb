@@ -7,14 +7,14 @@ class TopicsController < ApplicationController
   def index
     # すべてのトピックを取得する処理をindexアクションに定義 Topic=モデル名
     @topics = Topic.all
-    # binding.pry # ブレークポイントを作成
-    # raise
+
   end
 
   # showアクションを定義します。入力フォームと一覧を表示するためインスタンスを2つ生成します。
   def show
     @comment = @topic.topic_comments.build
     @comments = @topic.topic_comments
+    #binding.pry # ブレークポイントを作成
     #Notification.find(params[:notification_id]).update(read: true) if params[:notification_id]
   end
 

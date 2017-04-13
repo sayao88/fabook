@@ -8,8 +8,8 @@ class TopicCommentsController < ApplicationController
         # クライアント要求に応じてフォーマットを変更
         respond_to do |format|
             if @comment.save
-                format.html { redirect_to topic_path(@topic), notice: 'コメントを投稿しました。' }
-                format.json { render :show, status: :created, location: @comment }
+                format.html { redirect_to root_path, notice: 'コメントを投稿しました。' }
+                format.json { render :index, status: :created, location: @comment }
                 # JS形式でレスポンスを返します。
                 format.js { render :index }
                 # unless @comment.topic.user_id == current_user.id
@@ -21,9 +21,27 @@ class TopicCommentsController < ApplicationController
                 #   unread_counts: Notification.where(user_id: @comment.topic.user.id, read: false).count
                 # })
             else
-                format.html { render :new }
+                format.html { render :index , notice: 'コメントを投稿できませんでした。時間を置いて再度お試しください。'}
                 format.json { render json: @comment.errors, status: :unprocessable_entity }
             end
+        end
+    end
+
+
+    def edit
+        @comment = TopicComment.find(params[:id])
+        @topic = @comment.topic
+    end
+
+    def update
+        @comment = TopicComment.find(params[:id])
+        @topic = @comment.topic
+        @comment.update
+        respond_to do |format|
+            #redirect_to topic_path(@topic), notice: 'コメントを削除しました。'
+            format.html { redirect_to root_path, notice: 'コメントを削除しました。' }
+            format.js { render :index }
+            # binding.pry
         end
     end
 
@@ -33,7 +51,7 @@ class TopicCommentsController < ApplicationController
         @comment.destroy
         respond_to do |format|
             #redirect_to topic_path(@topic), notice: 'コメントを削除しました。'
-            format.html { redirect_to topic_path(@topic), notice: 'コメントを削除しました。' }
+            format.html { redirect_to root_path, notice: 'コメントを削除しました。' }
             format.js { render :index }
             # binding.pry
         end

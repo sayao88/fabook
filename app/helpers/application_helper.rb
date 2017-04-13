@@ -1,5 +1,24 @@
 module ApplicationHelper
 
+  # ユーザー一覧を取得する
+  def user_list(current_user)
+    User.all
+  end
+
+  # カレントユーザー充てのコメント一覧
+  def current_user_topics
+    @current_user_topics = current_user.topics
+    #.where(user_id: current_user.id).where(read: false).order(created_at: :desc)
+
+  end
+
+
+  # トピック一覧にコメントを出す
+  def comment_create(topic_id)
+    @topic = Topic.find(topic_id)
+    @topic.topic_comments.build
+  end
+
   # プロフィールイメージ
   def profile_img(user,class_name = "mod-img-profile-small")
     # アップロードした画像用

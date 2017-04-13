@@ -1,18 +1,39 @@
-<ul>
-<%= topic.id %>
 
-  <% comments.each do |comment| %><%= comment.id %>
-    <% unless comment.id.nil? %>
-      <li>
-        <p class="left"><span class="util-font-s"><%= comment.user.name %>さんがコメントしました。</span></p>
-        <p class="left"><%= comment.content %></p>
-        <% if current_user.id == comment.user.id %>
-          <p class="right">
-            <%= link_to '', topic_topic_comment_path(topic, comment), class: "fa fa-trash-o fa-lg", method: :delete, remote: true, data: { confirm: '本当に削除していいですか？' } %>
-          </p>
-        <% end %>
-      </li>
-      <hr>
-    <% end %>
+<div class="layout-list-1collumn" id="js-comment-area-<%= topic.id %>">
+  <ul class="layout-list__ul">
+    <% comments.each do |comment| %>
+      <% unless comment.id.nil? %>
+        <li class="layout-list__li">
+
+<div class="mod-textbox-topic-comment">
+  <% if current_user.id == comment.user.id %>
+    <div class="mod-dropdown-action-comment-menu">
+      <div class="dropdown__content-wrap">
+          <span class="dropdown__trigger">
+            <%# link_to "編集", edit_topic_path(topic.id),remote: true, class: 'mod-btn-quiet vr-small vr-width-auto' %>
+            <%= link_to "", topic_topic_comment_path(topic, comment),remote: true, class: 'fa fa-edit',title:"編集" %> 
+            <%= link_to "", topic_topic_comment_path(topic, comment), method: :delete, data: {confirm:'本当に削除していいですか？'},remote: true, class: 'fa fa-trash',title:"削除" %>
+          </span>
+          <div class="dropdown__content">
+          </div>
+        </div>
+    <!--/.mod-dropdown--></div>
   <% end %>
-</ul>
+  <div class="textbox__content">
+      <div class="textbox__content-inner">
+          <div class="textbox__img-wrap">
+              <%= profile_img(comment.user) %>
+          </div>
+          <div class="textbox__description-wrap">
+            <span class="util-font-bold"><%= comment.user.name %></span><br>
+            <%= comment.content %>
+          </div>
+      <!--/.textbox__content-inner--></div>
+  <!--/.textbox__content --></div>
+<!--/.mod-textbox --></div>
+
+        <!--/layout-list__li--></li>
+      <% end %>
+    <% end %>
+  </ul>
+<!--/layout-list--></div>

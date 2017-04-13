@@ -10,6 +10,11 @@ class ApplicationController < ActionController::Base
     @notifications_count = Notification.where(user_id: current_user.id).where(read: false).count
   end
 
+  # def user_name
+  #   @users_name = User()
+  # end
+
+
   # configure_permitted_parametersという専用のストロングパラメータを設定するメソッドを使用して、
   # nameカラムが新規登録とアカウント更新の際に、パラメータに含まれるようにする。
   

@@ -1,3 +1,6 @@
+<div class="layout-body__body-content-wrap">
+  <div class="layout-body__main-content-wrap">
+
 <section class="layout-section-for-reading">
   <div class="layout-section__inner-wrap">
     <span class="adj-layout-first"> </span>
@@ -11,16 +14,13 @@
         <% end %>
 
         <div class="layout-btn">
-            <%= link_to "トピックを作成する", new_topic_path, class: 'mod-btn-default vr-small' %>
+            <%= link_to "+ トピックを作成する", new_topic_path, class: 'mod-btn-default vr-width-auto' %>
         </div>
 
-
-
-
-
-        <div class="mod-textbox-topic-list">
-            <% @topics.each do |topic| %>
-                <div class="textbox__content">
+        <% @topics.each do |topic| %>
+        <div class="layout-box-default">
+            <div class="layout-box__first-wrap">
+                <% if current_user.id == topic.user_id %>
                     <div class="mod-dropdown-action-menu">
                         <div class="dropdown__content-wrap">
                             <span class="dropdown__trigger js-show-trigger">
@@ -35,30 +35,63 @@
                             </div>
                         </div>
                     <!--/.mod-dropdown--></div>
-                    <div class="textbox__content-inner">
-                        <div class="textbox__img-wrap">
-                            <%= profile_img(topic.user) %>
-                        </div>
-                        <div class="textbox__title-wrap">
-                            <%= topic.user.name %><br>
-                            <span class="util-font-s util-font-quiet"><%= topic.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[topic.created_at.wday]})") %></span>
+                <% end %>
+                <div class="mod-textbox-topic-list">
+                        <div class="textbox__content">
+                            <div class="textbox__content-inner">
+                                <div class="textbox__img-wrap">
+                                    <%= profile_img(topic.user) %>
+                                </div>
+                                <div class="textbox__title-wrap">
+                                    <span class="util-font-bold"><%= topic.user.name %></span><br>
+                                    <span class="util-font-s util-font-quiet"><%= topic.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[topic.created_at.wday]})") %></span>
 
-                        </div>
-                        <div class="textbox__description-wrap">
-                            <p class="mod-p">
-                                 <span class="util-font-bold"><%= topic.title %></span>
-                            </p>
-                            <%= topic.content %>
-                            <%= link_to "more", topic_path(topic) %>
-                        </div>
-                        <div class="textbox__description-wrap">
+                                </div>
+                                <div class="textbox__description-wrap">
+                                    <p class="mod-p">
+                                         <span class="util-font-bold"><%= topic.title %></span>
+                                    </p>
+                                    <%= topic.content %>
+                                    <%= link_to "..more", topic_path(topic) %>
 
-                        </div>
-                    <!--/.textbox__content-inner--></div>
-                <!--/.textbox__content --></div>
-        <% end %>
-    <!--/.mod-textbox --></div>
+                                    <span class="adj-layout-first"> </span>
+
+                                </div>
+                                <div class="textbox__description-wrap">
+
+                                </div>
+                            <!--/.textbox__content-inner--></div>
+                        <!--/.textbox__content --></div>
+                <!--/.mod-textbox --></div>
+
+        </div>
+    <!--/.layout-box--></div>
+
+
+    <div class="layout-box-comment">
+        <div class="layout-box__first-wrap">
+            <%= render partial: 'topic_comments/index', locals: { comments: topic.topic_comments, topic: topic} %>
+
+            <%= render partial: 'topic_comments/form', locals: { comment: comment_create(topic.id), topic: topic} %>
+</form>
+
+        </div>
+    <!--/.layout-box--></div>
+    <% end %>
+
 
     <span class="adj-layout-end"> </span>
   </div>
 </section>
+
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+    <%= render partial: 'application/sidebar_1' %>
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+    <%= render partial: 'application/sidebar_2' %>
+  </div>
+
+</div>

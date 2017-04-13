@@ -1,11 +1,7 @@
 <%= form_for([topic,comment], remote: true) do |f| %>
   <%= f.error_messages! %>
   <%= f.hidden_field :topic_id %>
-  <div class="field">
-    <%= f.text_field :content, placeholder: "内容", class: "form-control"  %>
-  </div>
-  <br>
-  <div class="layout-btn">
-    <%= f.submit '投稿', class: 'mod-btn-default vr-small'%>
-  </div>
+    <div class="mod-layout-btn">
+        <%= f.text_field :content, placeholder: "内容", class: "mod-formtype-text vr-form-w-75"  %><%= f.submit '投稿', class: 'mod-btn-default vr-small vr-form-w-25'%>
+    </div>
 <% end %>

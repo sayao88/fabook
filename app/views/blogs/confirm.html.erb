@@ -13,7 +13,9 @@
     <%= form_for(@blog, url: new_blog_path, method: 'get') do |f| %>
       <%= f.hidden_field :title %>
       <%= f.hidden_field :content %>
-      <%= f.submit "もどる", name: 'back', class: 'btn btn-default btn-block' %>
+      <div class="layout-btn">
+        <%= f.submit "戻る", name: 'back', class: 'mod-btn-back vr-small vr-width-auto' %>
+      </div>
     <% end %>
   </div>
     <span class="adj-layout-end"> </span>
