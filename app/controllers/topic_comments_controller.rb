@@ -27,21 +27,26 @@ class TopicCommentsController < ApplicationController
         end
     end
 
-
     def edit
         @comment = TopicComment.find(params[:id])
-        @topic = @comment.topic
+        respond_to do |format|
+            format.html { redirect_to root_path }
+            format.js { render :edit }
+            # binding.pry
+        end
     end
 
     def update
         @comment = TopicComment.find(params[:id])
-        @topic = @comment.topic
-        @comment.update
         respond_to do |format|
-            #redirect_to topic_path(@topic), notice: 'コメントを削除しました。'
-            format.html { redirect_to root_path, notice: 'コメントを削除しました。' }
-            format.js { render :index }
-            # binding.pry
+            if @comment.update(comment_params)
+                format.html { redirect_to root_path, notice: 'コメントを更新しました。' }
+                format.js { render :index }
+                # binding.pry
+            else
+                format.html { render :index , notice: 'コメントを更新できませんでした。時間を置いて再度お試しください。'}
+                format.json { render json: @comment.errors, status: :unprocessable_entity }
+            end
         end
     end
 

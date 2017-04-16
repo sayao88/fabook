@@ -1,2 +1,2 @@
-$("#js-comment-area-<%= @comment.topic.id %>").html("<%= j(render 'topic_comments/index', { comments: @comment.topic.topic_comments, topic: @comment.topic }) %>")
+$("#js-comment-area-<%= @comment.topic.id %>").html("<%= j(render 'topic_comments/index', { comments: @comment.topic.topic_comments.order(:created_at), topic: @comment.topic }) %>")
 $(':text').val('')

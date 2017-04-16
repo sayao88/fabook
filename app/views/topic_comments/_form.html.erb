@@ -1,7 +1,9 @@
-<%= form_for([topic,comment], remote: true) do |f| %>
-  <%= f.error_messages! %>
-  <%= f.hidden_field :topic_id %>
-    <div class="mod-layout-btn">
-        <%= f.text_field :content, placeholder: "内容", class: "mod-formtype-text vr-form-w-75"  %><%= f.submit '投稿', class: 'mod-btn-default vr-small vr-form-w-25'%>
-    </div>
+<% if user_signed_in? %>
+    <%= form_for([topic,comment], remote: true) do |f| %>
+      <%= f.error_messages! %>
+      <%= f.hidden_field :topic_id %>
+        <div class="mod-layout-btn">
+            <%= f.text_field :content, placeholder: "コメントを入力", class: "mod-formtype-text vr-form-w-80"  %><%= f.submit '投稿', class: 'mod-btn-default vr-small vr-form-w-20'%>
+        </div>
+    <% end %>
 <% end %>

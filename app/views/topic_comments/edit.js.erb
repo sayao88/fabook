@@ -1,0 +1,7 @@
+
+const $_obj_comment = $("#js-comment-form-<%= @comment.id %>");
+$_obj_comment.html("<%= j(render 'topic_comments/edit', { comment: @comment, topic: @comment.topic }) %>");
+$_obj_comment.children(':text').val('<%= @comment.content %>');
+
+<% #編集時に不要なものを非表示する（js-action-hideクラスをつける） %>
+$("#js-each-comment-area-<%= @comment.id %> .js-action-hide").fadeOut();

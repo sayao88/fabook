@@ -1,39 +1,40 @@
 
-<div class="layout-list-1collumn" id="js-comment-area-<%= topic.id %>">
-  <ul class="layout-list__ul">
-    <% comments.each do |comment| %>
-      <% unless comment.id.nil? %>
-        <li class="layout-list__li">
+  <div class="layout-list-comment" id="js-comment-area-<%= topic.id %>">
+    <ul class="layout-list__ul">
+      <% comments.each do |comment| %>
+        <% unless comment.id.nil? %>
+          <li class="layout-list__li">
 
-<div class="mod-textbox-topic-comment">
-  <% if current_user.id == comment.user.id %>
-    <div class="mod-dropdown-action-comment-menu">
-      <div class="dropdown__content-wrap">
-          <span class="dropdown__trigger">
-            <%# link_to "編集", edit_topic_path(topic.id),remote: true, class: 'mod-btn-quiet vr-small vr-width-auto' %>
-            <%= link_to "", topic_topic_comment_path(topic, comment),remote: true, class: 'fa fa-edit',title:"編集" %> 
-            <%= link_to "", topic_topic_comment_path(topic, comment), method: :delete, data: {confirm:'本当に削除していいですか？'},remote: true, class: 'fa fa-trash',title:"削除" %>
-          </span>
-          <div class="dropdown__content">
-          </div>
-        </div>
-    <!--/.mod-dropdown--></div>
-  <% end %>
-  <div class="textbox__content">
-      <div class="textbox__content-inner">
-          <div class="textbox__img-wrap">
-              <%= profile_img(comment.user) %>
-          </div>
-          <div class="textbox__description-wrap">
-            <span class="util-font-bold"><%= comment.user.name %></span><br>
-            <%= comment.content %>
-          </div>
-      <!--/.textbox__content-inner--></div>
-  <!--/.textbox__content --></div>
-<!--/.mod-textbox --></div>
+  <div class="mod-textbox-topic-comment" id="js-each-comment-area-<%= comment.id %>">
 
-        <!--/layout-list__li--></li>
-      <% end %>
+    <% if user_signed_in? && current_user.id == comment.user.id %>
+      <div class="mod-dropdown-action-comment-menu js-action-hide">
+        <div class="dropdown__content-wrap">
+            <span class="dropdown__trigger">
+              <%# link_to "編集", edit_topic_path(topic.id),remote: true, class: 'mod-btn-quiet vr-small vr-width-auto' %>
+              <%= link_to "", edit_topic_topic_comment_path(topic, comment),remote: true, class: 'fa fa-edit',title:"編集" %> 
+              <%= link_to "", topic_topic_comment_path(topic, comment), method: :delete, data: {confirm:'本当に削除していいですか？'},remote: true, class: 'fa fa-trash',title:"削除" %>
+            </span>
+            <div class="dropdown__content">
+            </div>
+          </div>
+      <!--/.mod-dropdown--></div>
     <% end %>
-  </ul>
-<!--/layout-list--></div>
+    <div class="textbox__content">
+        <div class="textbox__content-inner">
+            <div class="textbox__img-wrap">
+                <%= profile_img(comment.user,'mod-img-profile-xsmall') %>
+            </div>
+            <div class="textbox__description-wrap">
+              <span class="util-font-bold"><%= comment.user.name %></span> <span class="util-font-s util-font-quiet"><%= comment.created_at.to_s(:default) %></span><br>
+              <span id="js-comment-form-<%= comment.id %>"><%= comment.content %></span>
+            </div>
+        <!--/.textbox__content-inner--></div>
+    <!--/.textbox__content --></div>
+  <!--/.mod-textbox --></div>
+
+          <!--/layout-list__li--></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <!--/layout-list--></div>
