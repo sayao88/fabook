@@ -40,41 +40,26 @@
             </div>
             <div class="header__primary-nav">
                 <ul class="header__primary-nav__menu-01">
-                    <li><a href="top.html">menu1</a></li>
-                    <li class="subelement js-recentPageChangeActive"><a href="list.html">menu2</a></li>
                 </ul>
                 <ul class="header__primary-nav__menu-02">
-                    
                       <% if user_signed_in? %>
                       <% else %>
                         <li><%= link_to 'ログイン', new_user_session_path  %></li>
                         <li><%= link_to 'サインアップ', new_user_registration_path %></li>
                       <% end %>
-
-                      <li>
-                        <%= link_to  notifications_index_path, class: "header__icon-link" do %>
-                          <i class="fa fa-bell fa-1x"><span id="unread_count"><%= @notifications_count %></span></i>
-                        <% end %>
-                    </li>
                     <% if user_signed_in? %>
-                      <li><%= current_user.name %></li>
+                      <li><%= link_to 'ホーム', root_path %></li>
                       <li class="vr-dropdown">
-                          <a class="header__icon-link vr-hamburger-icon js-dropdown-trigger" href="javascript:void(0)">
-                              <span class="header__icon-link-text">メニューリスト</span>
-                              <span class="header__icon-hamburger">
-                                  <em class="header__icon-hamburger-line" aria-hidden="true"></em>
-                              </span>
+                          <a class="js-dropdown-trigger vr-dropdown-arrow" href="javascript:void(0)">
+                            <%= profile_img(current_user,'mod-img-profile-xsmall') %> <%= current_user.name %>
                           </a>
                           <ul class="header__menu-child">
-                              <li class="subelement js-recentPageChangeActive">
-                                <%= link_to 'マイページ', edit_user_registration_path %>
-                              </li>
-                              <li class="subelement js-recentPageChangeActive">
-                                <%= link_to "メッセージ", conversations_path %>
-                              </li>
-                              <li class="subelement js-recentPageChangeActive">
-                                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-                              </li>
+                            <li class="subelement">
+                              <%= link_to 'マイページ', edit_user_registration_path %>
+                            </li>
+                            <li class="subelement">
+                              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+                            </li>
                           </ul>
                       </li>
                     <% end %>

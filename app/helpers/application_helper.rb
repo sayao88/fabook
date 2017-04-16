@@ -1,14 +1,25 @@
 module ApplicationHelper
 
-  # ユーザー一覧を取得する
-  def user_list(current_user)
+  # カレントユーザーがフォローしているユーザー一覧を取得する
+  def friend_list()
+    #User.all
+    #current_user.followers.where(id:2)
+    Relationship.where(follower_id:current_user.id)
+  end
+
+  # カレントユーザーをフォローしていて、カレントユーザーがフォローしていないユーザー一覧を取得する
+  def follower_user_list()
+     Relationship.where.not(follower_id:current_user.id)#.where(followed_id:current_user.id)
+  end
+
+  # フォローされていない、していないユーザーリスト
+  def other_user_list()
     User.all
   end
 
   # カレントユーザー充てのコメント一覧
   def current_user_topics
-    @current_user_topics = current_user.topics
-    #.where(user_id: current_user.id).where(read: false).order(created_at: :desc)
+    @current_user_topics = current_user.topics.order(:created_at).reverse_order
 
   end
 
@@ -16,7 +27,7 @@ module ApplicationHelper
   # トピック一覧にコメントを出す
   def comment_create(topic_id)
     @topic = Topic.find(topic_id)
-    @topic.topic_comments.build
+    @topic.topic_comments.order(:created_at).build
   end
 
   # プロフィールイメージ

@@ -1,16 +1,67 @@
+<% if user_signed_in? %>
 
-    <div class="mod-side-menu-0002">
+    <div class="mod-side-menu-0002 vr-for-fabook">
         <div class="side-menu__first-wrap">
             <div class="side-menu__second-wrap">
                 <p class="side-menu__p">友達リスト</p>
+                <% unless friend_list().length == 0 %>
                 <ul class="side-menu__ul">
-                <% user_list(current_user).each do |user| %>
+                    <% friend_list().each do |relationship| %>
+                        <% if relationship.follower.id == current_user.id %>
+                        <li class="side-menu__li">
+                            <div class="side-menu__left-area">
+                                <%= profile_img(relationship.followed,'side-menu__thumbs') %>
+                            <!--/side-menu__left-area--></div>
+                            <div class="side-menu__right-area">
+                                <p class="side-menu__p__upper"><%= relationship.followed.name %></p>
+                            <!--/side-menu__right-area--></div>
+                        </li>
+                        <% end %>
+                    <% end %>
+                </ul>
+                <% else %>
+                <p class="mod-p-default">まだ友達はいません。</p>
+                <% end %>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>
+
+<% unless follower_user_list().length == 0 %>
+    <div class="mod-side-menu-0002 vr-for-fabook">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">友達申請があります</p>
+                <ul class="side-menu__ul">
+
+                <% follower_user_list().each do |relationship| %>
+                    <li class="side-menu__li">
+                        <div class="side-menu__left-area">
+                            <%= profile_img(relationship.follower,'side-menu__thumbs') %>
+                        <!--/side-menu__left-area--></div>
+                        <div class="side-menu__right-area">
+                            <p class="side-menu__p__upper"><%= relationship.follower.name %>
+                            <%= render partial: 'users/follow_form', locals: { user: relationship.follower } %></p>
+                        <!--/side-menu__right-area--></div>
+                    </li>
+                    <% end %>
+                </ul>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>
+<% end %>
+
+        <div class="mod-side-menu-0002 vr-for-fabook">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">もっと友達を増やしましょう</p>
+                <ul class="side-menu__ul">
+                <% other_user_list().each do |user| %>
                     <li class="side-menu__li">
                         <div class="side-menu__left-area">
                             <%= profile_img(user,'side-menu__thumbs') %>
                         <!--/side-menu__left-area--></div>
                         <div class="side-menu__right-area">
-                            <p class="side-menu__p__upper"><%= user.name %></p>
+                            <p class="side-menu__p__upper"><%= user.name %><%= render partial: 'users/follow_form', locals: { user: user } %></p>
                         <!--/side-menu__right-area--></div>
                     </li>
                     <% end %>
@@ -19,42 +70,4 @@
         <!--/side-menu__first-wrap--></div>
     <!--/mod-side-menu-0002--></div>
 
-    <div class="mod-side-menu-0002">
-        <div class="side-menu__first-wrap">
-            <div class="side-menu__second-wrap">
-                <p class="side-menu__p">あなたをフォローしています</p>
-                <ul class="side-menu__ul">
-                <% user_list(current_user).each do |user| %>
-                    <li class="side-menu__li">
-                        <div class="side-menu__left-area">
-                            <%= profile_img(user,'side-menu__thumbs') %>
-                        <!--/side-menu__left-area--></div>
-                        <div class="side-menu__right-area">
-                            <p class="side-menu__p__upper"><%= user.name %></p>
-                        <!--/side-menu__right-area--></div>
-                    </li>
-                    <% end %>
-                </ul>
-            <!--/side-menu__second-wrap--></div>
-        <!--/side-menu__first-wrap--></div>
-    <!--/mod-side-menu-0002--></div>
-
-        <div class="mod-side-menu-0002">
-        <div class="side-menu__first-wrap">
-            <div class="side-menu__second-wrap">
-                <p class="side-menu__p">もっと知り合いを探しましょう</p>
-                <ul class="side-menu__ul">
-                <% user_list(current_user).each do |user| %>
-                    <li class="side-menu__li">
-                        <div class="side-menu__left-area">
-                            <%= profile_img(user,'side-menu__thumbs') %>
-                        <!--/side-menu__left-area--></div>
-                        <div class="side-menu__right-area">
-                            <p class="side-menu__p__upper"><%= user.name %></p>
-                        <!--/side-menu__right-area--></div>
-                    </li>
-                    <% end %>
-                </ul>
-            <!--/side-menu__second-wrap--></div>
-        <!--/side-menu__first-wrap--></div>
-    <!--/mod-side-menu-0002--></div>
+<% end %>
