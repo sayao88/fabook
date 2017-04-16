@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
   
   def index
     # すべてのトピックを取得する処理をindexアクションに定義 Topic=モデル名
-    @topics = Topic.all
+    @topics = Topic.order(:created_at).reverse_order
 
   end
 

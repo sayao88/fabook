@@ -1,3 +1,9 @@
+<div class="layout-body__body-content-wrap">
+  <div class="layout-body__main-content-wrap">
+
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
 
 <% if notice then %>
     <div class="layout-box-info">
@@ -6,10 +12,6 @@
         </div>
     <!--/.layout-box--></div>
 <% end %>
-
-<section class="layout-section-for-reading">
-  <div class="layout-section__inner-wrap">
-    <span class="adj-layout-first"> </span>
 
     <div class="layout-box-default">
         <div class="layout-box__first-wrap">
@@ -53,3 +55,15 @@
     <span class="adj-layout-end"> </span>
   </div>
 </section>
+
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+    <%= render partial: 'application/sidebar_1' %>
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+    <%= render partial: 'application/sidebar_2' %>
+  </div>
+
+</div>

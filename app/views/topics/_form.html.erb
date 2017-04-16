@@ -1,12 +1,4 @@
 
-<% if notice then %>
-    <div class="layout-box-info">
-        <div class="layout-box__first-wrap">
-            <p class="mod-p-default"><%= notice %></p>
-        </div>
-    <!--/.layout-box--></div>
-<% end %>
-
 <%= form_for(@topic) do |f| %>
   <%= f.error_messages! %>
   <%= f.label :title %>
