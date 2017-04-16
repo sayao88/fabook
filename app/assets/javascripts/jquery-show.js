@@ -19,6 +19,7 @@
 
     var _classname_active = 'is-show-content';
     var _trigger_obj_class = '.js-show-trigger';
+    var _not_hide_trigger_obj_class = '.js-not-hide-trigger';
 
 //-----------------------------------------------------------
 // 関数を定義 | 連想配列を定義
@@ -31,7 +32,12 @@
 $(function(){
 
     $(_trigger_obj_class).on('click',function(){
-        $(this).toggleClass(_classname_active);
+        if ($(this).hasClass(_classname_active)){
+            $(_trigger_obj_class).removeClass(_classname_active);//一度すべてのshowになっているものを非表示にする
+        }else{
+            $(_trigger_obj_class).removeClass(_classname_active);
+            $(this).addClass(_classname_active);
+        }
     });
 
 });

@@ -32,8 +32,12 @@
 $(function(){
 
     $(_trigger_obj_class).on('click',function(){
-        $(this).parent('li').toggleClass(_classname_active);
-        console.log("test");
+        if ($(this).parent('li').hasClass(_classname_active)){
+            $(_trigger_obj_class).parent('li').removeClass(_classname_active);//一度すべてのshowになっているものを非表示にする
+        }else{
+            $(_trigger_obj_class).parent('li').removeClass(_classname_active);
+            $(this).parent('li').addClass(_classname_active);
+        }
     });
 
 
