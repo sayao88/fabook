@@ -1,20 +1,33 @@
 module ApplicationHelper
 
-  # カレントユーザーがフォローしているユーザー一覧を取得する
+  # カレントユーザーがフォローしていて、カレントユーザーをフォローしているユーザー一覧を取得する
   def friend_list()
-    #User.all
-    #current_user.followers.where(id:2)
     Relationship.where(follower_id:current_user.id)
   end
 
   # カレントユーザーをフォローしていて、カレントユーザーがフォローしていないユーザー一覧を取得する
-  def follower_user_list()
-     Relationship.where.not(follower_id:current_user.id)#.where(followed_id:current_user.id)
+    # 1.カレントユーザーをフォローしているユーザーを取得
+  def follow_current_user_list()
+    current_user.followers
+  end
+    # 2.カレントユーザーがまだフォローしていないユーザーであるかどうかをチェック
+  def followed_by_current_user?(user)
+     user.followers.exists?(id:current_user.id)
   end
 
-  # フォローされていない、していないユーザーリスト
-  def other_user_list()
-    User.all
+    # カレントユーザーがフォローしているユーザーを取得
+  def follow_other_user_list()
+    current_user.followed_users
+  end
+
+    # 2.フォロー先のユーザーがまだカレントユーザーをフォローしていないかどうかをチェック
+  def followed_by_other_user?(user)
+     user.followed_users.exists?(id:current_user.id)
+  end
+
+  # 自分以外のユーザーリスト
+  def user_list()
+    User.where.not(id:current_user.id)
   end
 
   # カレントユーザー充てのコメント一覧
