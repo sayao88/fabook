@@ -26,7 +26,7 @@
                 <%= profile_img(comment.user,'mod-img-profile-xsmall') %>
             </div>
             <div class="textbox__description-wrap">
-              <span class="util-font-bold"><%= comment.user.name %></span> <span class="util-font-s util-font-quiet"><%= comment.created_at.to_s(:default) %></span><br>
+              <span class="util-font-bold"><%= link_to comment.user.name, comment.user %></span> <span class="util-font-s util-font-quiet"><%= comment.created_at.to_s(:default) %></span><br>
               <span id="js-comment-form-<%= comment.id %>"><%= comment.content %></span>
             </div>
         <!--/.textbox__content-inner--></div>

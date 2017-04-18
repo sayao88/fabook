@@ -1,73 +1,153 @@
+<span class="adj-layout-first"> </span>
+
 <% if user_signed_in? %>
+<%# unless follower_user_list().length == 0 %>
 
-    <div class="mod-side-menu-0002 vr-for-fabook">
-        <div class="side-menu__first-wrap">
-            <div class="side-menu__second-wrap">
-                <p class="side-menu__p">友達リスト</p>
-                <% unless friend_list().length == 0 %>
-                <ul class="side-menu__ul">
-                    <% friend_list().each do |relationship| %>
-                        <% if relationship.follower.id == current_user.id %>
-                        <li class="side-menu__li">
-                            <div class="side-menu__left-area">
-                                <%= profile_img(relationship.followed,'side-menu__thumbs') %>
-                            <!--/side-menu__left-area--></div>
-                            <div class="side-menu__right-area">
-                                <p class="side-menu__p__upper"><%= relationship.followed.name %></p>
-                            <!--/side-menu__right-area--></div>
-                        </li>
-                        <% end %>
-                    <% end %>
-                </ul>
-                <% else %>
-                <p class="mod-p-default">まだ友達はいません。</p>
+
+<div class="layout-list-sidebar">
+    <ul class="layout-list__ul">
+        <li class="layout-list__li">
+
+    <div class="layout-box-notice">
+        <div class="layout-box__first-wrap">
+
+    <div class="mod-heading-lv6">
+      <p class="heading__h-element">
+          <span class="heading__span"><i class="fa fa-exclamation-circle"></i> 友達申請があります</span>
+      </p>
+    <!--/.mod-heading--></div>
+
+    <div class="mod-textbox-sidebar-userlist">
+        <% follow_current_user_list().each do |user| %>
+            <% if !followed_by_current_user?(user) %>
+              <div class="textbox__content">
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                      </div>
+                      <div class="textbox__title-wrap">
+                        <span class="util-font-s"><%= link_to user.name, user %></span>
+                      </div>
+                      <div class="textbox__description-wrap">
+                        <%= render partial: 'users/follow_form', locals: { user: user } %>
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --></div>
+            <% end %>
+        <% end %>
+    <!--/.mod-textbox --></div>
+<%# end %>
+        </div>
+    <!--/.layout-box--></div>
+
+
+</li>
+<li class="layout-list__li">
+
+    <div class="layout-box-notice">
+        <div class="layout-box__first-wrap">
+
+    <div class="mod-heading-lv6">
+      <p class="heading__h-element">
+          <span class="heading__span">友達申請中です</span>
+      </p>
+    <!--/.mod-heading--></div>
+    <div class="mod-textbox-sidebar-userlist">
+        <% follow_other_user_list().each do |user| %>
+            <% if !followed_by_other_user?(user) %>
+              <div class="textbox__content">
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                      </div>
+                      <div class="textbox__title-wrap">
+                        <span class="util-font-s"><%= link_to user.name, user %></span>
+                      </div>
+                      <div class="textbox__description-wrap">
+                        <%= render partial: 'users/follow_form', locals: { user: user } %>
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --></div>
+            <% end %>
+        <% end %>
+    <!--/.mod-textbox --></div>
+
+        </div>
+    <!--/.layout-box--></div>
+
+</li>
+<li class="layout-list__li">
+    <div class="layout-box-sidebar-default">
+        <div class="layout-box__first-wrap">
+
+    <div class="mod-heading-lv6">
+      <p class="heading__h-element">
+          <span class="heading__span">友達リスト</span>
+      </p>
+    <!--/.mod-heading--></div>
+    <% unless friend_list().length == 0 %>
+        <div class="mod-textbox-sidebar-userlist">
+            <% follow_current_user_list().each do |user| %>
+                <% if followed_by_current_user?(user) %>
+                  <div class="textbox__content">
+                      <div class="textbox__content-inner">
+                          <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                          </div>
+                          <div class="textbox__title-wrap">
+                            <span class="util-font-s"><%= link_to user.name, user %></span>
+                          </div>
+                      <!--/.textbox__content-inner--></div>
+                  <!--/.textbox__content --></div>
                 <% end %>
-            <!--/side-menu__second-wrap--></div>
-        <!--/side-menu__first-wrap--></div>
-    <!--/mod-side-menu-0002--></div>
+            <% end %>
+        <!--/.mod-textbox --></div>
+    <% else %>
+        <p class="mod-p-default">まだ友達はいません。</p>
+    <% end %>
 
-<% unless follower_user_list().length == 0 %>
-    <div class="mod-side-menu-0002 vr-for-fabook">
-        <div class="side-menu__first-wrap">
-            <div class="side-menu__second-wrap">
-                <p class="side-menu__p">友達申請があります</p>
-                <ul class="side-menu__ul">
+        </div>
+    <!--/.layout-box--></div>
 
-                <% follower_user_list().each do |relationship| %>
-                    <li class="side-menu__li">
-                        <div class="side-menu__left-area">
-                            <%= profile_img(relationship.follower,'side-menu__thumbs') %>
-                        <!--/side-menu__left-area--></div>
-                        <div class="side-menu__right-area">
-                            <p class="side-menu__p__upper"><%= relationship.follower.name %>
-                            <%= render partial: 'users/follow_form', locals: { user: relationship.follower } %></p>
-                        <!--/side-menu__right-area--></div>
-                    </li>
-                    <% end %>
-                </ul>
-            <!--/side-menu__second-wrap--></div>
-        <!--/side-menu__first-wrap--></div>
-    <!--/mod-side-menu-0002--></div>
+</li>
+
+<%# if user_list().length != 0 %>
+<li class="layout-list__li">
+
+    <div class="layout-box-sidebar-default">
+        <div class="layout-box__first-wrap">
+
+    <div class="mod-heading-lv6">
+      <p class="heading__h-element">
+          <span class="heading__span">もっと友達を増やしましょう</span>
+      </p>
+    <!--/.mod-heading--></div>
+    <div class="mod-textbox-sidebar-userlist">
+        <% user_list().each do |user| %>
+            <% if !followed_by_other_user?(user) && !followed_by_current_user?(user) %>
+              <div class="textbox__content">
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                      </div>
+                      <div class="textbox__title-wrap">
+                        <span class="util-font-s"><%= link_to user.name, user %></span>
+                      </div>
+                      <div class="textbox__description-wrap">
+                        <%= render partial: 'users/follow_form', locals: { user: user } %>
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --></div>
+            <% end %>
+        <% end %>
+    <!--/.mod-textbox --></div>
+
+        </div>
+    <!--/.layout-box--></div>
+
+      <!--/layout-list__li--></li>
+<%# end #if user_list().length != 0 %>
+
+</ul>
+<!--/layout-list--></div>
+
 <% end %>
 
-        <div class="mod-side-menu-0002 vr-for-fabook">
-        <div class="side-menu__first-wrap">
-            <div class="side-menu__second-wrap">
-                <p class="side-menu__p">もっと友達を増やしましょう</p>
-                <ul class="side-menu__ul">
-                <% other_user_list().each do |user| %>
-                    <li class="side-menu__li">
-                        <div class="side-menu__left-area">
-                            <%= profile_img(user,'side-menu__thumbs') %>
-                        <!--/side-menu__left-area--></div>
-                        <div class="side-menu__right-area">
-                            <p class="side-menu__p__upper"><%= user.name %><%= render partial: 'users/follow_form', locals: { user: user } %></p>
-                        <!--/side-menu__right-area--></div>
-                    </li>
-                    <% end %>
-                </ul>
-            <!--/side-menu__second-wrap--></div>
-        <!--/side-menu__first-wrap--></div>
-    <!--/mod-side-menu-0002--></div>
+<span class="adj-layout-end"> </span>
 
-<% end %>

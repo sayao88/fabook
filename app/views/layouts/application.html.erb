@@ -48,7 +48,6 @@
                         <li><%= link_to 'サインアップ', new_user_registration_path %></li>
                       <% end %>
                     <% if user_signed_in? %>
-                      <li><%= link_to 'ホーム', root_path %></li>
                       <li class="vr-dropdown">
                           <a class="js-dropdown-trigger vr-dropdown-arrow" href="javascript:void(0)">
                             <%= profile_img(current_user,'mod-img-profile-xsmall') %> <%= current_user.name %>
@@ -62,6 +61,7 @@
                             </li>
                           </ul>
                       </li>
+                      <li class="vr-hide-sp"><%= link_to 'ホーム', root_path %></li>
                     <% end %>
                 <!-- /header__regular-menu --></ul>
             <!-- /header__primary-nav --></div>

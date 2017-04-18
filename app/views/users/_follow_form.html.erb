@@ -5,8 +5,8 @@
       <%= f.submit "友達になる", class: "mod-btn-default vr-small vr-width-auto util-font-s" %>
     <% end %>
   <% else %>
-    <%= form_for(current_user.relationships.find_by(followed_id: user.id), html: { method: :delete }, remote: true) do |f| %>
-      <%= f.submit "つながりを解除", class: "mod-btn-quiet vr-small vr-width-auto util-font-s" %>
+    <%= form_for(current_user.relationships.find_by(followed_id: user.id), html: { method: :delete }, remote: true,data: {confirm:'本当にやめていいですか？'}) do |f| %>
+      <%= f.submit "友達をやめる", class: "mod-btn-quiet vr-small vr-width-auto util-font-s" %>
     <% end %>
   <% end %>
 </div>
