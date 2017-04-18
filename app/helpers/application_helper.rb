@@ -1,10 +1,5 @@
 module ApplicationHelper
 
-  # カレントユーザーがフォローしていて、カレントユーザーをフォローしているユーザー一覧を取得する
-  def friend_list()
-    Relationship.where(follower_id:current_user.id)
-  end
-
   # カレントユーザーをフォローしていて、カレントユーザーがフォローしていないユーザー一覧を取得する
     # 1.カレントユーザーをフォローしているユーザーを取得
   def follow_current_user_list()
@@ -37,7 +32,7 @@ module ApplicationHelper
   end
 
 
-  # トピック一覧にコメントを出す
+  # トピック一覧にコメントフォームを出す
   def comment_create(topic_id)
     @topic = Topic.find(topic_id)
     @topic.topic_comments.order(:created_at).build
