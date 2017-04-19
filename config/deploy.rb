@@ -5,13 +5,13 @@ lock '3.6.0'
 set :application, 'achieve'
 
 # cloneするgitのレポジトリ（xxxxxxxx：ユーザ名、yyyyyyyy：アプリケーション名）
-set :repo_url, 'git@bitbucket.org:sa88/dive-archive.git'
+set :repo_url, 'git@bitbucket.org:sa88/dive20_facebook.git'
 
 # deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, ENV['BRANCH'] || 'master'
 
 # deploy先のディレクトリ。
-set :deploy_to, '/var/www/achieve'
+set :deploy_to, '/var/www/fabook'
 
 # Default value for :scm is :git
 # set :scm, :git
