@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
     has_many :followed_users, through: :relationships, source: :followed
     has_many :followers, through: :reverse_relationships, source: :follower
 
+    #自分を除いたユーザーリスト
+    def self.users_except_myself(user_id)
+      User.where.not(id:user_id)
+    end
+
     def self.create_unique_string
     SecureRandom.uuid
     end

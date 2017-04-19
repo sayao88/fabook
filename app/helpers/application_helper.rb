@@ -1,36 +1,19 @@
 module ApplicationHelper
 
-  # カレントユーザーをフォローしていて、カレントユーザーがフォローしていないユーザー一覧を取得する
-    # 1.カレントユーザーをフォローしているユーザーを取得
-  def follow_current_user_list()
-    current_user.followers
-  end
-    # 2.カレントユーザーがまだフォローしていないユーザーであるかどうかをチェック
+  #カレントユーザーがまだフォローしていないユーザーであるかどうかをチェック
   def followed_by_current_user?(user)
      user.followers.exists?(id:current_user.id)
   end
 
-    # カレントユーザーがフォローしているユーザーを取得
-  def follow_other_user_list()
-    current_user.followed_users
-  end
-
-    # 2.フォロー先のユーザーがまだカレントユーザーをフォローしていないかどうかをチェック
+  #フォロー先のユーザーがまだカレントユーザーをフォローしていないかどうかをチェック
   def followed_by_other_user?(user)
      user.followed_users.exists?(id:current_user.id)
-  end
-
-  # 自分以外のユーザーリスト
-  def user_list()
-    User.where.not(id:current_user.id)
   end
 
   # カレントユーザー充てのコメント一覧
   def current_user_topics
     @current_user_topics = current_user.topics.order(:created_at).reverse_order
-
   end
-
 
   # トピック一覧にコメントフォームを出す
   def comment_create(topic_id)
