@@ -1,11 +1,11 @@
 <span class="adj-layout-first"> </span>
 
 <% if user_signed_in? %>
-<%# unless follower_user_list().length == 0 %>
-
 
 <div class="layout-list-sidebar">
     <ul class="layout-list__ul">
+
+
         <li class="layout-list__li">
 
     <div class="layout-box-notice">
@@ -18,7 +18,7 @@
     <!--/.mod-heading--></div>
 
     <div class="mod-textbox-sidebar-userlist">
-        <% follow_current_user_list().each do |user| %>
+        <% current_user.followers.each do |user| %>
             <% if !followed_by_current_user?(user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
@@ -35,12 +35,11 @@
             <% end %>
         <% end %>
     <!--/.mod-textbox --></div>
-<%# end %>
         </div>
     <!--/.layout-box--></div>
 
-
 </li>
+
 <li class="layout-list__li">
 
     <div class="layout-box-notice">
@@ -52,7 +51,7 @@
       </p>
     <!--/.mod-heading--></div>
     <div class="mod-textbox-sidebar-userlist">
-        <% follow_other_user_list().each do |user| %>
+        <% current_user.followed_users.each do |user| %>
             <% if !followed_by_other_user?(user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
@@ -72,8 +71,9 @@
 
         </div>
     <!--/.layout-box--></div>
-
 </li>
+
+
 <li class="layout-list__li">
     <div class="layout-box-sidebar-default">
         <div class="layout-box__first-wrap">
@@ -83,9 +83,9 @@
           <span class="heading__span">友達リスト</span>
       </p>
     <!--/.mod-heading--></div>
-    <% unless follow_current_user_list().length == 0 %>
+    <% unless current_user.followers.length == 0 %>
         <div class="mod-textbox-sidebar-userlist">
-            <% follow_current_user_list().each do |user| %>
+            <% current_user.followers.each do |user| %>
                 <% if followed_by_current_user?(user) %>
                   <div class="textbox__content">
                       <div class="textbox__content-inner">
@@ -108,7 +108,7 @@
 
 </li>
 
-<%# if user_list().length != 0 %>
+<% if current_user.followed_users != User.users_except_myself(current_user.id).length %>
 <li class="layout-list__li">
 
     <div class="layout-box-sidebar-default">
@@ -120,7 +120,7 @@
       </p>
     <!--/.mod-heading--></div>
     <div class="mod-textbox-sidebar-userlist">
-        <% user_list().each do |user| %>
+        <% User.users_except_myself(current_user.id).each do |user| %>
             <% if !followed_by_other_user?(user) && !followed_by_current_user?(user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
@@ -142,7 +142,7 @@
     <!--/.layout-box--></div>
 
       <!--/layout-list__li--></li>
-<%# end #if user_list().length != 0 %>
+<% end #if current_user.followed_users != User.users_except_myself(current_user.id).length %>
 
 </ul>
 <!--/layout-list--></div>
