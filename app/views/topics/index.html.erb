@@ -54,14 +54,10 @@
                                         <p class="mod-p">
                                              <span class="util-font-bold"><%= topic.title %></span>
                                         </p>
-                                        <%= topic.content %>
-                                        <%= link_to "..more", topic_path(topic) %>
-
-                                        <span class="adj-layout-first"> </span>
-
                                     </div>
                                     <div class="textbox__description-wrap">
-
+                                        <p class="mod-p"><%= topic.content %></p>
+                                        <%# link_to "..more", topic_path(topic) %>
                                     </div>
                                 <!--/.textbox__content-inner--></div>
                             <!--/.textbox__content --></div>
