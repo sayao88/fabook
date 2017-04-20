@@ -1,15 +1,46 @@
 
+
 <%= form_for(@topic) do |f| %>
-  <%= f.error_messages! %>
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'form-control' %>
-  <br>
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'form-control' %>
-  <br>
-  <%= f.submit '投稿', class: 'btn btn-primary btn-block' %>
+    <%= f.error_messages! %>
+
+<div class="layout-form-topic-create">
+
+    <ul class="layout-form__wrap">
+
+
+        <li class="layout-form__group">
+
+            <%= f.label :title,class: 'layout-form__label' %>
+            <div class="layout-form__form">
+                <%= f.text_field :title, class: 'mod-formtype-text' %>
+            </div>
+        </li>
+        <li class="layout-form__group">
+            <%= f.label :content,class: 'layout-form__label' %>
+            <div class="layout-form__form">
+                <%= f.text_area :content, class: 'mod-formtype-textarea' %>
+            </div>
+        </li>
+    </ul>
+<!--/.layout-form --></div>
+
+  <div class="layout-btn">
+      <%= f.submit "投稿", class: "mod-btn-default" %>
+  <!--/layout-btn--></div>
 <% end %>
 
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+
+<section class="layout-section-bottom">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
 <div class="layout-btn">
-    <%= link_to "ホームに戻る", root_path, class: 'mod-btn-back vr-small vr-width-auto' %>
+    <%= link_to "ホームに戻る", root_path, class: 'mod-btn-back vr-width-narrow vr-small' %>
 </div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

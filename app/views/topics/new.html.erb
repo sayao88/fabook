@@ -1,14 +1,22 @@
+<% if notice then %>
 <section class="layout-section-for-reading">
   <div class="layout-section__inner-wrap">
     <span class="adj-layout-first"> </span>
 
-    <% if notice then %>
         <div class="layout-box-info">
             <div class="layout-box__first-wrap">
                 <p class="mod-p-default"><%= notice %></p>
             </div>
         <!--/.layout-box--></div>
-    <% end %>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
+<% end %>
+
+<section class="layout-section-for-reading">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
 
     <div class="mod-heading-lv1">
       <h1 class="heading__h-element">
@@ -16,7 +24,6 @@
       </h1>
     <!--/.mod-heading-lv1--></div>
     <%= render 'form' %>
-    <span class="adj-layout-end"> </span>
-  </div>
-</section>
+
+
 
