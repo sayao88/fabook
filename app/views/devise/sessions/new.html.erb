@@ -1,47 +1,59 @@
-<div class="container">
+
 <span class="adj-layout-first"> </span>
 
-    <div class="layout-box-login">
-        <div class="layout-box__first-wrap">
-            <div class="mod-heading-lv1-0005">
-                <h2 class="heading__h-element">
-                    <span class="heading__span">ログイン</span>
-                </h2>
-            <!--/.mod-heading-lv1--></div>
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <%= devise_error_messages! %>
+<div class="layout-box-login">
+    <div class="layout-box__first-wrap">
+        <div class="mod-heading-login">
+            <h1 class="heading__h-element">
+                <span class="heading__span">ログイン</span>
+            </h1>
+        <!--/.mod-heading-lv1--></div>
 
-              <% if notice %>
-                <p class="alert alert-notice"><%= notice %></p>
-              <% end %>
-              <% if alert %>
-                <p class="alert alert-error"><%= alert %></p>
-              <% end %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "layout-form-tag") do |f| %>
+          <% if devise_error_messages! %>
+            <p class="mod-p-default"><span class="util-font-red"><%= devise_error_messages! %></span></p>
+          <% end %>
+          <% if notice %>
+            <p class="mod-p-default"><%= notice %></p>
+          <% end %>
+          <% if alert %>
+            <p class="mod-p-default"><span class="util-font-red"><%= alert %></span></p>
+          <% end %>
 
-              <div class="field">
-                <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "メールアドレス" %>
-              </div>
+          <div class="layout-form-login">
+              <ul class="layout-form__wrap">
+                  <li class="layout-form__group">
+                      <div class="layout-form__mod-form">
+                        <%= f.email_field :email, autofocus: true, class: "mod-formtype-text", placeholder: "メールアドレス" %>
+                      </div>
+                  </li>
+                  <li class="layout-form__group">
+                      <div class="layout-form__mod-form">
+                        <%= f.password_field :password, autocomplete: "off", class: "mod-formtype-text", placeholder: "パスワード" %>
+                      </div>
+                  </li>
+              </ul>
+          <!--/.layout-form --></div>
 
-              <div class="field">
-                <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "パスワード" %>
-              </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="mod-p-default">
+              <%= f.check_box :remember_me %>
+              <%= f.label :内容を記憶させる %>
+            </div>
+          <% end %>
 
-              <% if devise_mapping.rememberable? %>
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :内容を記憶させる %>
-                </div>
-              <% end %>
+          <div class="layout-btn">
+              <%= f.submit "ログイン", class: "mod-btn-default vr-width-full" %>
+          <!--/layout-btn--></div>
+        <% end %>
 
-              <div class="actions">
-                <%= f.submit "ログイン", class: "btn btn-primary btn-block" %>
-              </div>
-            <% end %>
+    </div>
+<!--/.layout-box-login--></div>
 
-            <%= render "devise/shared/links" %>
+<div class="layout-box-login-option">
+    <div class="layout-box__first-wrap">
+        <%= render "devise/shared/links" %>
+    </div>
+<!--/.layout-box--></div>
 
-        </div>
-    <!--/.layout-box-login--></div>
-
-
-</div>
+<span class="adj-layout-end"> </span>
