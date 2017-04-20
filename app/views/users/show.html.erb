@@ -1,18 +1,128 @@
+<div class="layout-body__body-content-wrap">
+  <div class="layout-body__main-content-wrap">
+
 <section class="layout-section-for-reading">
   <div class="layout-section__inner-wrap">
     <span class="adj-layout-first"> </span>
-    
-    <div class="mod-heading-lv1">
-      <h1 class="heading__h-element">
-          <span class="heading__span">ユーザー <%= @user.name %></span>
-      </h1>
-    <!--/.mod-heading-lv1--></div>
-    <%= render 'follower_list' %>
-    <br><br>
-    <%= render 'followed_list' %>
-    <br>
-    <p><%= link_to '戻る', root_path %></p>
+
+        <% if notice then %>
+            <div class="layout-box-info">
+                <div class="layout-box__first-wrap">
+                    <p class="mod-p-default"><%= notice %></p>
+                </div>
+            <!--/.layout-box--></div>
+        <% end # notice then %>
+
+        <% if @topics.length != 0 %>
+            <% @topics.each do |topic| %>
+            <div class="layout-box-default">
+                <div class="layout-box__first-wrap">
+                    <% if user_signed_in? %>
+                        <% if current_user.id == topic.user_id %>
+                            <div class="mod-dropdown-action-menu">
+                                <div class="dropdown__content-wrap">
+                                    <span class="dropdown__trigger js-show-trigger">
+                                        
+                                    </span>
+                                    <div class="dropdown__content">
+                                        <div class="layout-btn">
+                                            <%= link_to "編集", edit_topic_path(topic.id), class: 'mod-btn-quiet vr-small vr-width-auto' %>
+                                            <%= link_to "削除", topic_path(topic), method: :delete, data: {confirm:'本当に削除していいですか？'}, class: 'mod-btn-warning vr-small vr-width-auto' %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <!--/.mod-dropdown--></div>
+                        <% end # current_user.id == topic.user_id %>
+                    <% end # user_signed_in? %>
+                    <div class="mod-textbox-topic-list" id="anchor_topic_area_<%= topic.id %>">
+                            <div class="textbox__content">
+                                <div class="textbox__content-inner">
+                                    <div class="textbox__img-wrap">
+                                        <%= profile_img(topic.user) %>
+                                    </div>
+                                    <div class="textbox__title-wrap">
+                                        <span class="util-font-bold"><%= topic.user.name %></span><br>
+                                        <span class="util-font-s util-font-quiet"><%= topic.created_at.to_s(:default) %></span>
+
+                                    </div>
+                                    <div class="textbox__description-wrap">
+                                        <p class="mod-p">
+                                             <span class="util-font-bold"><%= topic.title %></span>
+                                        </p>
+                                        <%= topic.content %>
+                                        <%= link_to "..more", topic_path(topic) %>
+
+                                        <span class="adj-layout-first"> </span>
+
+                                    </div>
+                                    <div class="textbox__description-wrap">
+
+                                    </div>
+                                <!--/.textbox__content-inner--></div>
+                            <!--/.textbox__content --></div>
+                    <!--/.mod-textbox --></div>
+
+                </div>
+            <!--/.layout-box--></div>
+
+            <div class="layout-box-comment">
+                <div class="layout-box__first-wrap">
+                    <% if topic.topic_comments.length != 0 %>
+                        <%= render partial: 'topic_comments/index', locals: { comments: topic.topic_comments.order(:created_at), topic: topic} %>
+                    <% end #if topic.topic_comments %>
+
+                    <%= render partial: 'topic_comments/form', locals: { comment: comment_create(topic.id), topic: topic} %>
+                </div>
+            <!--/.layout-box--></div>
+            <% end #@topics.each do |topic| %>
+        <% else #if @topics %>
+            <div class="layout-box-info">
+                <div class="layout-box__first-wrap">
+                    <p class="mod-p-default">まだこのユーザーのトピックはありません。</p>
+                </div>
+            <!--/.layout-box--></div>
+        <% end #if @topics %>
 
     <span class="adj-layout-end"> </span>
   </div>
 </section>
+
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+
+    <span class="adj-layout-first"> </span>
+
+    <div class="layout-box-default">
+        <div class="layout-box__first-wrap">
+          <p class="mod-p-default vr-center"><%= profile_img(@user,'mod-img-profile-large') %><br><%= @user.name %></p>
+          <% if current_user.id == @user.id %>
+            <div class="layout-btn">
+              <%= link_to "登録情報変更", edit_user_registration_path, class: "mod-btn-default vr-width-auto vr-small" %>
+            </div>
+          <% else # current_user.id == topic.user_id %>
+            <div class="layout-btn">
+                <%= render partial: 'users/follow_form', locals: { user: @user } %>
+            </div>
+          <% end # current_user.id == topic.user_id %>
+        </div>
+    <!--/.layout-box--></div>
+
+    <% if current_user.id == @user.id %>
+        <%= render partial: 'application/sidebar_1' %>
+    <% else %>
+        <%= render partial: 'application/sidebar_1_2' %>
+    <% end %>
+  </div>
+
+  <div class="layout-body__side-content-wrap">
+    <span class="adj-layout-first"> </span>
+    <% @topics.each do |topic| %>
+      <p class="mod-p-default"><%= link_to topic.title, topic_path(topic) %><br>
+      <span class="util-font-s util-font-quiet"><%= topic.created_at.to_s(:default) %></span></p>
+    <% end #@topics.each do %>
+    <%= render partial: 'application/sidebar_2' %>
+  </div>
+
+</div>

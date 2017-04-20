@@ -54,7 +54,10 @@
                           </a>
                           <ul class="header__menu-child">
                             <li class="subelement">
-                              <%= link_to 'マイページ', edit_user_registration_path %>
+                              <%= link_to 'マイページ', user_path(current_user) %>
+                            </li>
+                            <li class="subelement">
+                              <%= link_to 'ユーザー登録情報', edit_user_registration_path %>
                             </li>
                             <li class="subelement">
                               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>

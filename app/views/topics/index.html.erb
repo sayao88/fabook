@@ -42,10 +42,11 @@
                             <div class="textbox__content">
                                 <div class="textbox__content-inner">
                                     <div class="textbox__img-wrap">
-                                        <%= profile_img(topic.user) %>
+                                        <%= link_to topic.user do %><%= profile_img(topic.user) %><% end %>
                                     </div>
                                     <div class="textbox__title-wrap">
-                                        <span class="util-font-bold"><%= topic.user.name %></span><br>
+                                        <span class="util-font-bold">
+                                            <%= link_to topic.user.name, topic.user %></span><br>
                                         <span class="util-font-s util-font-quiet"><%= topic.created_at.to_s(:default) %></span>
 
                                     </div>
@@ -88,10 +89,12 @@
   </div>
 
   <div class="layout-body__side-content-wrap">
+    <span class="adj-layout-first"> </span>
     <%= render partial: 'application/sidebar_1' %>
   </div>
 
   <div class="layout-body__side-content-wrap">
+    <span class="adj-layout-first"> </span>
     <%= render partial: 'application/sidebar_2' %>
   </div>
 

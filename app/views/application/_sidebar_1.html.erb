@@ -1,4 +1,4 @@
-<span class="adj-layout-first"> </span>
+
 
 <% if user_signed_in? %>
 
@@ -19,7 +19,7 @@
 
     <div class="mod-textbox-sidebar-userlist">
         <% current_user.followers.each do |user| %>
-            <% if !followed_by_current_user?(user) %>
+            <% if !followed_by_current_user?(user,current_user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
                       <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
@@ -52,7 +52,7 @@
     <!--/.mod-heading--></div>
     <div class="mod-textbox-sidebar-userlist">
         <% current_user.followed_users.each do |user| %>
-            <% if !followed_by_other_user?(user) %>
+            <% if !followed_by_other_user?(user,current_user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
                       <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
@@ -86,7 +86,7 @@
     <% unless current_user.followers.length == 0 %>
         <div class="mod-textbox-sidebar-userlist">
             <% current_user.followers.each do |user| %>
-                <% if followed_by_current_user?(user) %>
+                <% if followed_by_current_user?(user,current_user) %>
                   <div class="textbox__content">
                       <div class="textbox__content-inner">
                           <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
@@ -121,7 +121,7 @@
     <!--/.mod-heading--></div>
     <div class="mod-textbox-sidebar-userlist">
         <% User.users_except_myself(current_user.id).each do |user| %>
-            <% if !followed_by_other_user?(user) && !followed_by_current_user?(user) %>
+            <% if !followed_by_other_user?(user,current_user) && !followed_by_current_user?(user,current_user) %>
               <div class="textbox__content">
                   <div class="textbox__content-inner">
                       <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>

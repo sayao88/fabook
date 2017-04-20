@@ -1,12 +1,12 @@
 module ApplicationHelper
 
   #カレントユーザーがまだフォローしていないユーザーであるかどうかをチェック
-  def followed_by_current_user?(user)
+  def followed_by_current_user?(user,current_user)
      user.followers.exists?(id:current_user.id)
   end
 
   #フォロー先のユーザーがまだカレントユーザーをフォローしていないかどうかをチェック
-  def followed_by_other_user?(user)
+  def followed_by_other_user?(user,current_user)
      user.followed_users.exists?(id:current_user.id)
   end
 

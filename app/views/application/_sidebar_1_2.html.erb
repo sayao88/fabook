@@ -1,0 +1,49 @@
+
+
+<% if user_signed_in? %>
+
+<div class="layout-list-sidebar">
+    <ul class="layout-list__ul">
+
+<li class="layout-list__li">
+    <div class="layout-box-sidebar-default">
+        <div class="layout-box__first-wrap">
+
+    <div class="mod-heading-lv6">
+      <p class="heading__h-element">
+          <span class="heading__span">友達リスト</span>
+      </p>
+    <!--/.mod-heading--></div>
+
+    <% unless @user.followers.length == 0 %>
+        <div class="mod-textbox-sidebar-userlist">
+            <% @user.followers.each do |user| %>
+                <% if followed_by_current_user?(user,@user) %>
+                  <div class="textbox__content">
+                      <div class="textbox__content-inner">
+                          <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                          </div>
+                          <div class="textbox__title-wrap">
+                            <span class="util-font-s"><%= link_to user.name, user %></span>
+                          </div>
+                      <!--/.textbox__content-inner--></div>
+                  <!--/.textbox__content --></div>
+                <% end %>
+            <% end %>
+        <!--/.mod-textbox --></div>
+    <% else %>
+        <p class="mod-p-default">まだ友達はいません。</p>
+    <% end %>
+
+        </div>
+    <!--/.layout-box--></div>
+
+</li>
+
+</ul>
+<!--/layout-list--></div>
+
+<% end %>
+
+<span class="adj-layout-end"> </span>
+
