@@ -10,13 +10,19 @@
 
 # end
 
-n=1
-while n <= 10
-  title = Faker::Lorem.sentence
-  content = Faker::Lorem.paragraph
-  Blog.create!(
-      title:title,
-      content:content,
+
+#Faker::Config.locale = :ja
+
+n=10+1
+count_n = n + 10
+
+while n <= count_n
+  topic_title = Faker::Lorem.sentence
+  topic_content = Faker::Lorem.paragraph
+
+  Topic.create!(
+      title:topic_title,
+      content:topic_content,
       user_id:n
   )
 
@@ -31,4 +37,16 @@ while n <= 10
     uid:n
   )
   n = n+1
+
 end
+
+  random = Random.new
+
+  10.times do |no|
+    topiccomment_content = Faker::Friends.quote
+    TopicComment.create!(
+      user_id:random.rand(11..20),
+      topic_id:random.rand(11..20),
+      content: topiccomment_content
+    )
+  end
