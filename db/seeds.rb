@@ -45,8 +45,8 @@ end
   10.times do |no|
     topiccomment_content = Faker::Friends.quote
     TopicComment.create!(
-      user_id:random.rand(1..10),
-      topic_id:random.rand(1..10),
+      user_id:no,
+      topic_id:no,
       content: topiccomment_content
     )
   end
