@@ -40,13 +40,14 @@ while n <= count_n
 
 end
 
-  random = Random.new
 
-  10.times do |no|
+n=1
+while n <= 9
     topiccomment_content = Faker::Friends.quote
     TopicComment.create!(
-      user_id:no,
-      topic_id:no,
+      user_id:n,
+      topic_id:n,
       content: topiccomment_content
     )
-  end
+    n = n+1
+end
