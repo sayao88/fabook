@@ -96,7 +96,7 @@
           <span class="heading__span">友達リスト</span>
       </p>
     <!--/.mod-heading--></div>
-    <% unless current_user.followers.length == 0 %>
+    <% if !@follower_flag && !@followed_flag %>
         <div class="mod-textbox-sidebar-userlist">
             <% current_user.followers.each do |user| %>
                 <% if followed_by_current_user?(user,current_user) %>

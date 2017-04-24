@@ -8,8 +8,18 @@
       </h1>
     <!--/.mod-heading-lv1--></div>
 
+<% current_user.followers.each do |user| %>
+    <% if !followed_by_current_user?(user,current_user) %>
+      <% @follower_flag = true %>
+    <% end %>
+<% end %>
+<% current_user.followed_users.each do |user| %>
+  <% if !followed_by_other_user?(user,current_user) %>
+    <% @followed_flag = true %>
+  <% end %>
+<% end %>
 
-<% if @follower_flag %>
+<% if !@follower_flag && !@followed_flag %>
     <div class="layout-list-4collumn">
         <ul class="layout-list__ul">
         <% @users.each do |user| %>

@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
   #友達申請中かどうかのフラグに使う
   @followed_flag = false
 
+  #他ユーザーのページで友達申請があるかどうかのフラグに使う
+  @follower_flag_other = false
+  #他ユーザーのページで友達申請中かどうかのフラグに使う
+  @followed_flag_other = false
+
   def current_notifications
     @notifications_count = Notification.where(user_id: current_user.id).where(read: false).count
   end

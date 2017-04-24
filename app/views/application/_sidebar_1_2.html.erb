@@ -15,7 +15,18 @@
       </p>
     <!--/.mod-heading--></div>
 
-    <% unless @user.followers.length == 0 %>
+    <% @user.followers.each do |user| %>
+          <% if !followed_by_current_user?(user,@user) %>
+            <% @follower_flag_other = true %>
+          <% end %>
+      <% end %>
+    <% @user.followed_users.each do |user| %>
+        <% if !followed_by_other_user?(user,@user) %>
+          <% @followed_flag_other = true %>
+        <% end %>
+    <% end %>
+
+    <% if !@followed_flag_other && !@follower_flag_other %>
         <div class="mod-textbox-sidebar-userlist">
             <% @user.followers.each do |user| %>
                 <% if followed_by_current_user?(user,@user) %>

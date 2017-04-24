@@ -1,0 +1,31 @@
+<% if user_signed_in? %>
+<div class="mod-side-menu-0002 vr-for-fabook">
+        <div class="side-menu__first-wrap">
+            <div class="side-menu__second-wrap">
+                <p class="side-menu__p">トピックへのコメント</p>
+                <% if user.topic_comments.length != 0 %>
+                    <% user_topics().each do |topic| %>
+                    <% if topic.topic_comments.length != 0 %>
+                        <p>「<%= link_to topic.title, root_path(:anchor => "anchor_topic_area_" + topic.id.to_s)  %>」へのコメント</p>
+                        <ul class="side-menu__ul">
+                            <% topic.topic_comments.each do |comment| %>
+                                <li class="side-menu__li">
+                                    <div class="side-menu__left-area">
+                                        <%= profile_img(comment.user,'side-menu__thumbs') %>
+                                    <!--/side-menu__left-area--></div>
+                                    <div class="side-menu__right-area">
+                                        <p class="side-menu__p__upper"><%= comment.user.name %></p>
+                                        <p class="side-menu__p__bottom"><%= comment.content %></p>
+                                    <!--/side-menu__right-area--></div>
+                                </li>
+                            <% end #topic.topic_comments.each do  %>
+                        </ul>
+                    <% end %>
+                <% end %>
+            <% else %>
+                <p class="mod-p-default">コメントはありません。</p>
+            <% end # user_topics().length != 0 %>
+            <!--/side-menu__second-wrap--></div>
+        <!--/side-menu__first-wrap--></div>
+    <!--/mod-side-menu-0002--></div>
+<% end %>
