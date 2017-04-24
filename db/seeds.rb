@@ -13,7 +13,7 @@
 
 #Faker::Config.locale = :ja
 
-n=10+1
+n=1
 count_n = n + 10
 
 while n <= count_n
@@ -27,7 +27,7 @@ while n <= count_n
   )
 
   name = Faker::LordOfTheRings.character
-  email = Faker::Internet.email
+  email = "aa"+n+"@aa.com"
   password = "password"
   User.create!(
     name:name,
@@ -45,8 +45,8 @@ end
   10.times do |no|
     topiccomment_content = Faker::Friends.quote
     TopicComment.create!(
-      user_id:random.rand(11..20),
-      topic_id:random.rand(11..20),
+      user_id:random.rand(1..10),
+      topic_id:random.rand(1..10),
       content: topiccomment_content
     )
   end
