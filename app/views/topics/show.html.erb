@@ -16,12 +16,30 @@
     <div class="layout-box-default">
         <div class="layout-box__first-wrap">
 
+                        <% if current_user.id == @topic.user_id %>
+                            <div class="mod-dropdown-action-menu">
+                                <div class="dropdown__content-wrap">
+                                    <span class="dropdown__trigger js-show-trigger">
+                                        
+                                    </span>
+                                    <div class="dropdown__content">
+                                        <div class="layout-btn">
+                                            <%= link_to "編集", edit_topic_path(@topic.id), class: 'mod-btn-quiet vr-small vr-width-auto' %>
+                                            <%= link_to "削除", topic_path(@topic), method: :delete, data: {confirm:'本当に削除していいですか？'}, class: 'mod-btn-warning vr-small vr-width-auto' %>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <!--/.mod-dropdown--></div>
+                        <% end # current_user.id == topic.user_id %>
+
           <div class="mod-heading-lv2">
             <h1 class="heading__h-element">
                 <span class="heading__span"><%= @topic.title %></span>
             </h1>
           <!--/.mod-heading--></div>
-          <p class="mod-p-default"><%= @topic.created_at.strftime("%y/%m/%d %p %l:%M") %></p>
+          <p class="mod-p-default"><span class="util-font-bold"><%= link_to @topic.user do %><%= profile_img(@topic.user,'mod-img-profile-xsmall') %><% end %></span> <%= link_to @topic.user.name, @topic.user %></span> 
+          <span class="util-font-s util-font-quiet"><%= @topic.created_at.to_s(:default) %></span></p>
           <p class="mod-p-default">
             <%= @topic.content %>
           </p>
@@ -36,14 +54,9 @@
                 <span class="heading__span">コメント一覧</span>
             </div>
           <!--/.mod-heading--></div>
-          <%= render partial: 'topic_comments/form', locals: { comment: @comment, topic: @topic } %>
-          <% if current_user.id == @topic.user_id %>
-            <p class="mod-p text-center"><%= link_to '編集', edit_topic_path(@topic) %></p>
-          <% end %>
+          <%= render partial: 'topic_comments/index', locals: { comments: @comments, topic: @topic } %>
 
-          <div id="comments_area">
-            <%= render partial: 'topic_comments/index', locals: { comments: @comments, topic: @topic } %>
-          </div>
+          <%= render partial: 'topic_comments/form', locals: { comment: @comment, topic: @topic } %>
 
       </div>
     <!--/.layout-box--></div>

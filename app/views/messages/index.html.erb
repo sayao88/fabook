@@ -50,7 +50,7 @@
 <%= form_for [@conversation, @message], html: {class: "layout-form-tag"} do |f| %>
   <div class="mod-p-default">
     <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-    <%= f.text_field :body, placeholder: "コメントを入力", class: "mod-formtype-text" %>
+    <%= f.text_field :body, placeholder: "メッセージを入力", class: "mod-formtype-text" %>
   </div>
   <div class="layout-btn">
       <%= f.submit 'メッセージを送る', class: 'mod-btn-default vr-small'%>
