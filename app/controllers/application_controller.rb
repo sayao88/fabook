@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
   # notification用記述（ログインしている場合のみ）
   before_action :current_notifications, if: :signed_in?
 
+  #友達申請があるかどうかのフラグに使う
+  @follower_flag = false
+  #友達申請中かどうかのフラグに使う
+  @followed_flag = false
+
   def current_notifications
     @notifications_count = Notification.where(user_id: current_user.id).where(read: false).count
   end

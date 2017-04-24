@@ -103,7 +103,7 @@
             </div>
           <% else # current_user.id == topic.user_id %>
             <div class="layout-btn">
-                <%= render partial: 'users/follow_form', locals: { user: @user } %>
+                <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post', class:"mod-btn-default vr-width-auto vr-small" %>
             </div>
           <% end # current_user.id == topic.user_id %>
         </div>

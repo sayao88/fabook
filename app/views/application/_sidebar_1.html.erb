@@ -5,74 +5,87 @@
 <div class="layout-list-sidebar">
     <ul class="layout-list__ul">
 
+      <% current_user.followers.each do |user| %>
+          <% if !followed_by_current_user?(user,current_user) %>
+            <% @follower_flag = true %>
+          <% end %>
+      <% end %>
 
-        <li class="layout-list__li">
+<% if @follower_flag %>
+      <li class="layout-list__li">
 
-    <div class="layout-box-notice">
-        <div class="layout-box__first-wrap">
+        <div class="layout-box-notice">
+            <div class="layout-box__first-wrap">
 
-    <div class="mod-heading-lv6">
-      <p class="heading__h-element">
-          <span class="heading__span"><i class="fa fa-exclamation-circle"></i> 友達申請があります</span>
-      </p>
-    <!--/.mod-heading--></div>
+              <div class="mod-heading-lv6">
+                <p class="heading__h-element">
+                    <span class="heading__span"><i class="fa fa-exclamation-circle"></i> 友達申請があります</span>
+                </p>
+              <!--/.mod-heading--></div>
 
-    <div class="mod-textbox-sidebar-userlist">
-        <% current_user.followers.each do |user| %>
-            <% if !followed_by_current_user?(user,current_user) %>
-              <div class="textbox__content">
-                  <div class="textbox__content-inner">
-                      <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
-                      </div>
-                      <div class="textbox__title-wrap">
-                        <span class="util-font-s"><%= link_to user.name, user %></span>
-                      </div>
-                      <div class="textbox__description-wrap">
-                        <%= render partial: 'users/follow_form', locals: { user: user } %>
-                      </div>
-                  <!--/.textbox__content-inner--></div>
-              <!--/.textbox__content --></div>
-            <% end %>
-        <% end %>
-    <!--/.mod-textbox --></div>
-        </div>
-    <!--/.layout-box--></div>
+              <div class="mod-textbox-sidebar-userlist">
+                  <% current_user.followers.each do |user| %>
+                      <% if !followed_by_current_user?(user,current_user) %>
+                        <div class="textbox__content">
+                            <div class="textbox__content-inner">
+                                <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                                </div>
+                                <div class="textbox__title-wrap">
+                                  <span class="util-font-s"><%= link_to user.name, user %></span>
+                                </div>
+                                <div class="textbox__description-wrap">
+                                  <%= render partial: 'users/follow_form', locals: { user: user } %>
+                                </div>
+                            <!--/.textbox__content-inner--></div>
+                        <!--/.textbox__content --></div>
+                      <% end %>
+                  <% end %>
+              <!--/.mod-textbox --></div>
+            </div>
+        <!--/.layout-box--></div>
 
-</li>
+      </li>
+<% end %>
 
+<% current_user.followed_users.each do |user| %>
+    <% if !followed_by_other_user?(user,current_user) %>
+      <% @followed_flag = true %>
+    <% end %>
+<% end %>
+<% if @followed_flag %>
 <li class="layout-list__li">
 
     <div class="layout-box-notice">
         <div class="layout-box__first-wrap">
 
-    <div class="mod-heading-lv6">
-      <p class="heading__h-element">
-          <span class="heading__span">友達申請中です</span>
-      </p>
-    <!--/.mod-heading--></div>
-    <div class="mod-textbox-sidebar-userlist">
-        <% current_user.followed_users.each do |user| %>
-            <% if !followed_by_other_user?(user,current_user) %>
-              <div class="textbox__content">
-                  <div class="textbox__content-inner">
-                      <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
-                      </div>
-                      <div class="textbox__title-wrap">
-                        <span class="util-font-s"><%= link_to user.name, user %></span>
-                      </div>
-                      <div class="textbox__description-wrap">
-                        <%= render partial: 'users/follow_form', locals: { user: user } %>
-                      </div>
-                  <!--/.textbox__content-inner--></div>
-              <!--/.textbox__content --></div>
+        <div class="mod-heading-lv6">
+          <p class="heading__h-element">
+              <span class="heading__span">友達申請中です</span>
+          </p>
+        <!--/.mod-heading--></div>
+        <div class="mod-textbox-sidebar-userlist">
+            <% current_user.followed_users.each do |user| %>
+                <% if !followed_by_other_user?(user,current_user) %>
+                  <div class="textbox__content">
+                      <div class="textbox__content-inner">
+                          <div class="textbox__img-wrap"><%= link_to user do %><%= profile_img(user,'mod-img-profile-xsmall') %><% end %>
+                          </div>
+                          <div class="textbox__title-wrap">
+                            <span class="util-font-s"><%= link_to user.name, user %></span>
+                          </div>
+                          <div class="textbox__description-wrap">
+                            <%= render partial: 'users/follow_form', locals: { user: user } %>
+                          </div>
+                      <!--/.textbox__content-inner--></div>
+                  <!--/.textbox__content --></div>
+                <% end %>
             <% end %>
-        <% end %>
-    <!--/.mod-textbox --></div>
+        <!--/.mod-textbox --></div>
 
         </div>
     <!--/.layout-box--></div>
 </li>
-
+<% end %>
 
 <li class="layout-list__li">
     <div class="layout-box-sidebar-default">

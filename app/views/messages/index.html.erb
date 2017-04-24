@@ -12,6 +12,10 @@
   <p class="text-center"><%= link_to '以前のメッセージ', '?m=all' %></p>
 <% end %>
 
+
+<div class="layout-box-default">
+  <div class="layout-box__first-wrap">
+
 <div class="mod-textbox-conversation">
     <% @messages.each do |message| %>
         <% if message.body %>
@@ -39,24 +43,38 @@
     <% end %>
 <!--/.mod-textbox --></div>
 
-<div class="layout-box-default">
-  <div class="layout-box__first-wrap">
+    </div>
+<!--/.layout-box--></div>
 
-<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
-  <p class="field mod-p">
-    <%= f.text_area :body, class: "form-control" %>
-    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
-  </p>
-  <p class="text-center"><%= f.submit "メッセージを送る",class:"btn btn-primary" %></p>
 
+<%= form_for [@conversation, @message], html: {class: "layout-form-tag"} do |f| %>
+  <div class="mod-p-default">
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+    <%= f.text_field :body, placeholder: "コメントを入力", class: "mod-formtype-text" %>
+  </div>
+  <div class="layout-btn">
+      <%= f.submit 'メッセージを送る', class: 'mod-btn-default vr-small'%>
+  </div>
 <% end %>
 
-  </div>
-</div>
-<p class="text-center"><%= link_to 'メッセージ一覧に戻る', conversations_path , class:"mod-btn-back vr-small" %></p>
-<p class="text-center"><%= link_to 'ユーザー一覧に戻る', users_path , class:"mod-btn-back vr-small" %></p>
     <span class="adj-layout-end"> </span>
   </div>
 </section>
 
+
+
+<section class="layout-section-bottom">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+<div class="layout-btn">
+    <%= link_to "友達リスト", users_path, class: 'mod-btn-default vr-width-narrow vr-small' %>
+</div>
+<div class="layout-btn">
+    <%= link_to "ホームに戻る", root_path, class: 'mod-btn-back vr-width-narrow vr-small' %>
+</div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>
 

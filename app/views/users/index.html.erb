@@ -4,14 +4,14 @@
     
     <div class="mod-heading-lv1">
       <h1 class="heading__h-element">
-          <span class="heading__span">ユーザー</span>
+          <span class="heading__span">友達リスト</span>
       </h1>
     <!--/.mod-heading-lv1--></div>
 
     <div class="layout-list-4collumn">
         <ul class="layout-list__ul">
         <% @users.each do |user| %>
-            <% if user.id != @myself.id %>
+            <% if followed_by_current_user?(user,current_user) %>
             <li class="layout-list__li">
 
 <div class="mod-textbox-a">

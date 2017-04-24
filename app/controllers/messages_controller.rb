@@ -36,15 +36,14 @@ class MessagesController < ApplicationController
 
 
     # 自分へのメッセージを表示したら既読を表示する
-    @receive_messages = @messages.where.not(user_id:current_user)
-
-    if @receive_messages
-      @receive_messages.each do |rmessage|
-        rmessage.read = true
-        rmessage.save
-      end
-    end
-    
+    # @message_flag = @messages.where.not(user_id:current_user).exists?
+    # if @message_flag
+    #     @receive_messages = @messages.where.not(user_id:current_user)
+    #     @receive_messages.each do |rmessage|
+    #       rmessage.read = true
+    #       rmessage.save
+    #     end
+    # end
 
     # フォーム用
     @message = @conversation.messages.build
