@@ -51,10 +51,10 @@
       <div class="layout-box__first-wrap">
           <div class="mod-heading-lv4">
             <div class="heading__h-element">
-                <span class="heading__span">コメント一覧</span>
+                <span class="heading__span">コメント</span>
             </div>
           <!--/.mod-heading--></div>
-          <%= render partial: 'topic_comments/index', locals: { comments: @comments, topic: @topic } %>
+            <%= render partial: 'topic_comments/index', locals: { comments: @comments, topic: @topic } %>
 
           <%= render partial: 'topic_comments/form', locals: { comment: @comment, topic: @topic } %>
 

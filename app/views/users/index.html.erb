@@ -8,6 +8,8 @@
       </h1>
     <!--/.mod-heading-lv1--></div>
 
+
+<% if @follower_flag %>
     <div class="layout-list-4collumn">
         <ul class="layout-list__ul">
         <% @users.each do |user| %>
@@ -38,9 +40,22 @@
         <% end %>
         </ul>
     <!--/layout-list--></div>
-
+<% else %>
+  <p class="mod-p-default">まだ友達はいません。</p>
+<% end %>
 
     <span class="adj-layout-end"> </span>
   </div>
 </section>
 
+<section class="layout-section-bottom">
+  <div class="layout-section__inner-wrap">
+    <span class="adj-layout-first"> </span>
+
+<div class="layout-btn">
+    <%= link_to "ホームに戻る", root_path, class: 'mod-btn-back vr-width-narrow vr-small' %>
+</div>
+
+    <span class="adj-layout-end"> </span>
+  </div>
+</section>

@@ -12,40 +12,39 @@
   <p class="text-center"><%= link_to '以前のメッセージ', '?m=all' %></p>
 <% end %>
 
+<% if @messages.count != 0 %>
+  <div class="layout-box-default">
+    <div class="layout-box__first-wrap">
 
-<div class="layout-box-default">
-  <div class="layout-box__first-wrap">
+  <div class="mod-textbox-conversation">
+      <% @messages.each do |message| %>
+          <% if message.body %>
+              <% user = User.find(message.user_id) %>
+              <div class="textbox__content <% if user.id == current_user.id %>vr-right<%end%>">
+                  <div class="textbox__content-inner">
+                      <div class="textbox__img-wrap">
+                          <%= profile_img(user,"mod-img-profile-xsmall") %>
+                      </div>
+                      <div class="textbox__title-wrap">
+                          <p class="mod-p vr-lh-sm"><span class="util-font-bold"><%= user.name %></span></p>
+                      </div>
+                      <div class="textbox__description-wrap">
+                          <div class="mod-balloon-default <% if user.id == current_user.id %>vr-right<%else%>vr-left<%end%>">
+                              <span class="balloon__body"><%= message.body %></span>
+                              <p class="mod-p vr-lh-xsm <% if user.id == current_user.id %>vr-right<%end%>">
+                                <span class="util-font-xs "><%= message.message_time %></span>
+                              </p>
+                          </div>
+                      </div>
+                  <!--/.textbox__content-inner--></div>
+              <!--/.textbox__content --></div>
+          <% end %>
+      <% end %>
+  <!--/.mod-textbox --></div>
 
-<div class="mod-textbox-conversation">
-    <% @messages.each do |message| %>
-        <% if message.body %>
-            <% user = User.find(message.user_id) %>
-            <div class="textbox__content <% if user.id == current_user.id %>vr-right<%end%>">
-                <div class="textbox__content-inner">
-                    <div class="textbox__img-wrap">
-                        <%= profile_img(user,"mod-img-profile-xsmall") %>
-                    </div>
-                    <div class="textbox__title-wrap">
-                        <p class="mod-p vr-lh-sm"><span class="util-font-bold"><%= user.name %></span></p>
-                    </div>
-                    <div class="textbox__description-wrap">
-                        <div class="mod-balloon-default <% if user.id == current_user.id %>vr-right<%else%>vr-left<%end%>">
-                            <span class="balloon__body"><%= message.body %></span>
-                            <p class="mod-p vr-lh-xsm">
-                              <span class="util-font-xs"><%= message.message_time %></span>　
-                              <span class="util-font-xs" id="test"><% if message.read %>既読<%end%></span>
-                            </p>
-                        </div>
-                    </div>
-                <!--/.textbox__content-inner--></div>
-            <!--/.textbox__content --></div>
-        <% end %>
-    <% end %>
-<!--/.mod-textbox --></div>
-
-    </div>
-<!--/.layout-box--></div>
-
+      </div>
+  <!--/.layout-box--></div>
+<% end %>
 
 <%= form_for [@conversation, @message], html: {class: "layout-form-tag"} do |f| %>
   <div class="mod-p-default">

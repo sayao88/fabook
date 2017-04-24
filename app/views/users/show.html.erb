@@ -118,10 +118,13 @@
 
   <div class="layout-body__side-content-wrap">
     <span class="adj-layout-first"> </span>
-    <% @topics.each do |topic| %>
-      <p class="mod-p-default"><%= link_to topic.title, topic_path(topic) %><br>
-      <span class="util-font-s util-font-quiet"><%= topic.created_at.to_s(:default) %></span></p>
-    <% end #@topics.each do %>
+    <% if @topics.length != 0 %>
+        <p class="mod-p-default"><%= @user.name %>のトピック</p>>
+        <% @topics.each do |topic| %>
+          <p class="mod-p-default"><%= link_to topic.title, topic_path(topic) %><br>
+          <span class="util-font-s util-font-quiet"><%= topic.created_at.to_s(:default) %></span></p>
+        <% end #@topics.each do %>
+    <% end %>
     <%= render partial: 'application/sidebar_2' %>
   </div>
 
