@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   # ログインしているかをチェック,ログインしていない場合はトピックにアクセスさせない
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show, :new, :create, :edit, :update ,:destroy]
   
   before_action :set_topic, only: [:show, :edit, :update ,:destroy]
   
@@ -19,8 +19,6 @@ class TopicsController < ApplicationController
   end
 
   def new
-    #ログインしてる人のみ作成できる
-    authenticate_user!
     if params[:back]
       @topic = Topic.new(topics_params)
     else
